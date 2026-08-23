@@ -738,6 +738,9 @@
       <div class="nav-item" onclick="showTab('guide-economyrush')">
         <span>🏰</span> Economy & Castle Rush
       </div>
+      <div class="nav-item" onclick="showTab('guide-undeadscourge')">
+        <span>🧟</span> Undead Scourge
+      </div>
     </div>
 
     <div class="nav-group">
@@ -848,6 +851,17 @@
             <div class="jump-btn-grid" style="margin-top:12px;">
               <button class="jump-btn" onclick="showTab('guide-economyrush')">🔍 View Economy Guide</button>
             </div>
+          </div>
+        </div>
+
+        <div class="card" style="margin-bottom: 20px;">
+          <div class="card-title">
+            <span>🧟 Module 6: Undead Scourge (Alliance Wave Defense)</span>
+            <span class="badge badge-gold">UPCOMING</span>
+          </div>
+          <p style="font-size:0.85rem; color:var(--text-muted);">Alliance PvE wave survival event: optimal reinforcement rotations, castle defense priorities, scoring thresholds, and fortress protection strategy.</p>
+          <div class="jump-btn-grid" style="margin-top:12px;">
+            <button class="jump-btn" onclick="showTab('guide-undeadscourge')">🔍 View Undead Scourge Overview</button>
           </div>
         </div>
       </section>
@@ -1070,6 +1084,44 @@
               • Maintain 2–3 dedicated farm castles focused 100% on Gathering Talents and Economy Research.<br>
               • Keep farm castles unguilded or in a dedicated farm alliance outside combat zones.<br>
               • Harvest farm RSS before major building pushes via low-tax alliance trading or direct plundering.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <!-- ================= TAB: UPCOMING UNDEAD SCOURGE ================= -->
+      <section id="guide-undeadscourge" class="tab-content">
+        <div class="page-header">
+          <h1 class="page-title">🧟 Undead Scourge: Alliance Defense Playbook</h1>
+          <div class="page-meta">
+            <div class="meta-tag">🛡️ <strong>Type:</strong> Alliance PvE Defense Waves</div>
+            <div class="meta-tag">🎯 <strong>Objective:</strong> 20 Waves Survival & Reinforcement Points</div>
+          </div>
+        </div>
+
+        <div class="alert alert-pro">
+          <div class="alert-icon">📌</div>
+          <div>
+            <strong>EVENT PLAYBOOK SLATED FOR NEXT EXPANSION:</strong> Comprehensive 20-wave defense guides, reinforcement rotation matrix, and fortress defense setup will be added here.
+          </div>
+        </div>
+
+        <div class="grid-2">
+          <div class="card">
+            <div class="card-title">🧟 Event Mechanics Overview</div>
+            <ul style="margin-left: 20px; color: var(--text-muted); font-size: 0.88rem; display:flex; flex-direction:column; gap:8px;">
+              <li><strong>20 Inbound Monster Waves:</strong> Undead legions march on all alliance castles simultaneously.</li>
+              <li><strong>2 Defeats = Elimination:</strong> Castles burning twice are eliminated from remaining waves.</li>
+              <li><strong>Fortress Defense (Wave 10 & 20):</strong> Elite boss waves targeting the central Alliance Fortress.</li>
+            </ul>
+          </div>
+
+          <div class="card">
+            <div class="card-title">🛡️ Core Strategy Pillars</div>
+            <p style="font-size:0.86rem; color:var(--text-muted);">
+              • <strong>Send Reinforcements Out:</strong> Strong players send defense marches to protect offline/smaller members.<br>
+              • <strong>Self-Garrison Balance:</strong> Maintain enough frontline troops at home while sending spare marches for reinforcement points.<br>
+              • <strong>Fortress Stacking:</strong> Mass reinforce the Alliance Fortress before Waves 10 and 20.
             </p>
           </div>
         </div>
@@ -1801,7 +1853,7 @@ Leadership of Realm [Y]</div>
         'hub-toc', 'hub-glossary',
         'col-overview', 'col-mechanics', 'col-trophies', 'col-leagues', 
         'col-scoring', 'col-diplomacy', 'col-growth', 'col-starter', 'col-outmatched',
-        'guide-acelord', 'guide-dragonarena', 'guide-herometa', 'guide-economyrush',
+        'guide-acelord', 'guide-dragonarena', 'guide-herometa', 'guide-economyrush', 'guide-undeadscourge',
         'tool-calc', 'tool-discord'
       ];
       for (const tabId of tabs) {

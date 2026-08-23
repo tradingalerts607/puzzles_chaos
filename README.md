@@ -14,6 +14,7 @@ Welcome to the **Puzzles & Chaos: Frozen Castle** master strategy playbook. This
 | **Dragon Arena & Clash** | Alliance PvP | Node control, bracket strategies, and deployment rotations. | *Upcoming* |
 | **Hero & Troop Meta** | Combat Optimization | Troop synergy (Cavalry / Infantry / Ranged), gear, runes, and hero formations. | *Upcoming* |
 | **Economy & Sanctuary Cycling** | Account Progression | Optimal resource management, hospital preservation, and rapid troop rebuilding. | *Upcoming* |
+| **Undead Scourge** | Alliance PvE / Defense | Wave defense reinforcement rotations, scoring milestones, and fortress protection. | *Upcoming* |
 
 ---
 
