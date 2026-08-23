@@ -31,7 +31,7 @@ Welcome to the **Puzzles & Chaos: Frozen Castle** master strategy playbook. This
   - **🏟️ League Divisions & 9-Realm Tournament:** Preparation vs. League Divisions (Servers 1-36, 37-72, 73-99+), Regular Season vs. Postseason, Championship Mark, Double Postseason Rewards, 4-round round-robin schedule across 3 arenas, and official Colonization Points ranking matrix (+100 for conquest, +25 for hold, 0 for loss).
   - **The Complete Casualty Hierarchy:** Medical Tents (T1 pre-fill) $\rightarrow$ Sanctuary (Capacity = Medical Tents, 100% free Holy Light revival at up to 7,500/hr) $\rightarrow$ Alliance Hospital (up to 100,000 overflow troops) $\rightarrow$ Permanent Death.
   - **Holy Light & Post-War Relief Growth Loop:** 14-day free Sanctuary recovery + 3-day **+300% War Relief buff** (covering up to 120% losses) to achieve **net positive military growth** after every war.
-  - **Instant Batch Healing:** Micro-batching heals (15–30 min) to get instant 0-second / 0-speedup alliance help clears.
-  - **🥊 Asymmetrical Underdog Tactics (vs Whales):** The Spire Bleed (24% loss/hr on enemy Hall), T-3s Ghost Recall trick, 100% T1 point denial, Spire-share damage control NAPs, and Woodland Banishment / Spire buff resets.
+  - **🥊 Asymmetrical Underdog Tactics (vs Whales):** The Spire Bleed (24% loss/hr on enemy Hall), T1 Meat-Shield Bait & 4-Spire Flank, 100% T1 point denial, Spire-share damage control NAPs, and Woodland Banishment / Spire buff resets.
+
 
 

@@ -429,7 +429,7 @@ When matched against an older, hyper-consolidated, or high-spending whale realm,
     [ TACTIC 1: THE SPIRE BLEED ]                                   [ TACTIC 2: 100% POINT DENIAL ]
     • Never suicide rallies into Hall                               • 100% Bubble mandate across realm
     • Multi-squads capture all 4 Spires                             • Send pure T1s (Whales get 0 pts)
-    • Spires fire 24% garrison loss / hr                            • Recall garrisons 3s before rally hits
+    • Spires fire 24% garrison loss / hr                            • T1 Meat-Shield Bait & 4-Spire Flank
                │                                                               │
                └───────────────────────────────┬───────────────────────────────┘
                                                ▼
@@ -444,13 +444,12 @@ When matched against an older, hyper-consolidated, or high-spending whale realm,
 * **The Execution:** Split your alliance into **4 agile Spire Strike Teams**. Focus 100% of your firepower on capturing and rotating control of the 4 outer Spires.
 * **The Math:** If you control 3 to 4 Spires, the automatic 10-minute artillery strikes will wipe **18% to 24% of the whale's Hall garrison every hour** with **zero combat casualties** on your side! This forces the whale to either bleed their elite army or abandon the Hall.
 
-### 2️⃣ The "Empty Garrison / Ghost Node" Recall Trick
-* When holding a Spire, an enemy whale will inevitably launch a devastating 5-minute rally to crush your defense.
-* **The Trick:** 
-  1. Hold the Spire and let the enemy rally march across the map.
-  2. At **T-minus 3 seconds** before the enemy rally hits, **recall all garrisoned troops simultaneously**.
-  3. The enemy whale's rally strikes an **empty Spire**, wasting their 5-minute rally, march speed-ups, and stamina without getting a single kill point!
-  4. Immediately send fast cavalry to re-occupy the Spire 5 seconds later. Repeat this cycle to mentally exhaust enemy leadership.
+### 2️⃣ The "T1 Meat-Shield Bait & 4-Spire Flank" Strategy
+* **Why leaving a Spire empty fails:** If defenders recall and leave a structure empty before impact, the enemy rally does NOT bounce; they simply enter and occupy it uncontested, taking the building with full whale defense stats.
+* **The Winning Counter-Tactic:**
+  1. **T1 Meat-Shield Cushion:** Hold the Spire with **100% disposable T1 troops**.
+  2. **Point Starvation:** When the enemy whale's rally strikes, the attacker earns **ZERO kill points** (starving their leaderboard rank), while your defenders earn full 12k milestone loss points at negligible T1 healing cost.
+  3. **The 4-Spire Flank:** While the whale's main army is locked down marching on or occupying Spire A, dispatch fast cavalry squads to simultaneously capture **Spires B, C, and D**. Controlling 3 Spires keeps the **18% loss/hr artillery bleed** actively pounding their Hall of Might!
 
 ### 3️⃣ Total Point & Kill Denial (Starving the Whales)
 * Whales participate in SvS to farm kill points and climb individual leaderboards. **Deny them their food.**
@@ -481,7 +480,7 @@ If the stat disparity is insurmountable:
 **Answer:** Open the **Conquest of Lords event panel**, tap the **Rank / Trophy icon**, and select **Realm Trophies**. This displays your realm's current bracket, trophy count, and the leaderboard of matching realms.
 
 ### Q2: How do we get our 12,000 personal points without destroying our main army?
-**Answer:** Accumulate **occupation points** (2,000 pts per 2h in Hall or 4h in Spire) combined with **T1 troop sacrifice runs**. Because T1 losses grant full loss points while costing virtually nothing to train, you can reach 12,000 points safely.
+**Answer:** Accumulate **2,000 occupation points** (1.5h in Hall or 3h in Spire) combined with **1:1 safe tile exchanges** (1M lost power = 400 pts / 1M killed = 100 pts) with an agreed opponent in the Woodland. Because Medical Tents are pre-filled with T1s, high-tier casualties go safely to the Sanctuary without the 30% structure permadeath penalty!
 
 ### Q3: What is the exact capacity of the Sanctuary?
 **Answer:** Your **Sanctuary Capacity is exactly equal to your total Medical Tent Capacity**. If your medical tents hold 250,000 troops, your Sanctuary will also hold up to 250,000 troops.
@@ -508,11 +507,11 @@ If the stat disparity is insurmountable:
 🛡️ 2. SHIELD MANDATE: All non-combatants MUST bubble 24h before 10:00 UTC.
 🎯 3. SPIRE RULE: Spires fire EVERY 10 MINS (1% Hall loss per spire). Spires MUST stay 100% held!
 🐴 4. MONO-TROOP ONLY: Check Rally Lead's troop type. NO MIXED/RAINBOW, NO SIEGE.
-🎖️ 5. 12K POINTS: Hit 12k points via Occupation (2h Hall / 4h Spire) + T1 loss runs (T1 kills = 0 pts; T1 losses = FULL pts).
+🎖️ 5. 12K POINTS: Hit 12k points via Occupation (1.5h Hall / 3h Spire) + 1:1 safe tile trades (1M lost = 400 pts / 1M killed = 100 pts).
 🏥 6. T1 PRE-FILL: Pre-fill Medical Tents with T1s so T10-T12 deaths go to Sanctuary (Revived 100% FREE via Holy Light)!
 ⚡ 7. INSTANT HEAL: Heal wounded in small 15-30 min batches for INSTANT free alliance-help clears.
-📈 8. WAR RELIEF (300%): Promote healed T1s to T10-T12 under the 300% buff (covers up to 120% losses). Net Army Growth!
-🥊 9. OUTMATCHED? Use Spire Bleed (24% loss/hr on enemy Hall) + Recall Trick at T-3s + 100% T1 point denial!
+📈 8. WAR RELIEF (300%): Promote healed T1s to T10-T12 under 3-day 300% buff (covers up to 120% losses). Net Army Growth!
+🥊 9. OUTMATCHED? Use Spire Bleed (24% loss/hr on enemy Hall) + T1 Meat-Shield Bait + 100% Point Denial!
 🤝 10. ALLIANCE COALITION: North Spire=[Alli A], East=[Alli B], West=[Alli C], South=[Alli D].
 ==========================================================================
 ```
