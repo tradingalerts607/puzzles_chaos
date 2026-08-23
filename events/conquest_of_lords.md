@@ -12,8 +12,8 @@
 **Conquest of Lords** is the premier bi-weekly cross-realm war in *Puzzles & Chaos: Frozen Castle*. Alliances from rival realms battle for sovereign control of the **Hall of Might** to crown their leader as **Emperor** and claim supreme realm decrees, trophy progression, and officer titles.
 
 ### 🏆 Match Victory Conditions
-1. **Dominion Rule (Instant Win):** Continuously occupy the **Hall of Might** for **8 consecutive hours**.
-2. **Endurance Rule (Time Limit):** If no alliance achieves an unbroken 8-hour streak within the 24-hour window, victory is awarded to the alliance with the **highest cumulative occupation time**.
+1. **Dominion Rule (Instant Win):** Continuously occupy the **Hall of Might** for **6 consecutive hours**.
+2. **Endurance Rule (Time Limit):** If no alliance achieves an unbroken 6-hour streak within the 24-hour window, victory is awarded to the alliance with the **highest cumulative occupation time**.
 
 ---
 
@@ -238,20 +238,20 @@ A divided home realm is guaranteed to lose against a united opponent. Establishi
 flowchart TD
     A[Saturday 09:30 UTC: Buff Up & Staging] --> B[10:00 UTC: Opening Blitz on Hall & 4 Spires]
     B --> C{Are all 4 Spires secured?}
-    C -->|Yes| D[Lockdown Defense & Start 8-Hour Countdown]
+    C -->|Yes| D[Lockdown Defense & Start 6-Hour Countdown]
     C -->|No - Enemy holds a Spire| E[Artillery Warning: 1% loss / 10 min]
     E --> F[Launch Coordinated 5-Min Rally on Contested Spire]
     F --> C
     D --> G[Manage Garrison Swaps & Hospital Healing Batches]
-    G --> H{8-Hour Continuous Hold Achieved?}
+    G --> H{6-Hour Continuous Hold Achieved?}
     H -->|Yes| I[Instant Victory / Emperor Crowned + Trophy Grade Gain]
     H -->|No| J[Hold Spires & Maximize Cumulative Time to 24:00 UTC]
 ```
 
 * **09:30 UTC (T-30m):** Talent respec to War, activate 50% ATK/DEF buffs, 50% March Size, and Dragon skills. Stage near designated alliance coordinates.
 * **10:00 UTC (Hour 0):** Launch simultaneous 5-minute rallies on the Hall of Might and all 4 Spires.
-* **10:00 – 18:00 UTC (The Golden Window):** Maintain unbroken 8-hour hold for an instant win.
-* **18:00 – 10:00 UTC Sunday (Endurance Phase):** If unbroken hold is disrupted, cycle garrisons to secure the highest cumulative occupation time.
+* **10:00 – 16:00 UTC (The Golden Window):** Maintain unbroken 6-hour hold for an instant win.
+* **16:00 – 10:00 UTC Sunday (Endurance Phase):** If unbroken hold is disrupted, cycle garrisons to secure the highest cumulative occupation time.
 
 ---
 
@@ -428,7 +428,7 @@ If the stat disparity is insurmountable:
 ```text
 ⚔️ ================= CONQUEST OF LORDS OPERATIONAL RULES ================= ⚔️
 ⏰ TIME: Saturday 10:00 AM UTC (Duration: 24 Hours)
-🎯 OBJECTIVE: Hall of Might (8h continuous or max cumulative time)
+🎯 OBJECTIVE: Hall of Might (6h continuous or max cumulative time)
 
 🏆 1. TROPHY GRADE: Defending home + taking foreign Hall maximizes Trophy gains.
 🛡️ 2. SHIELD MANDATE: All non-combatants MUST bubble 24h before 10:00 UTC.
@@ -440,5 +440,6 @@ If the stat disparity is insurmountable:
 📈 8. WAR RELIEF (300%): Promote healed T1s to T10-T12 under the 300% buff (covers up to 120% losses). Net Army Growth!
 🥊 9. OUTMATCHED? Use Spire Bleed (24% loss/hr on enemy Hall) + Recall Trick at T-3s + 100% T1 point denial!
 🤝 10. ALLIANCE COALITION: North Spire=[Alli A], East=[Alli B], West=[Alli C], South=[Alli D].
+==========================================================================
 ```
 
