@@ -232,7 +232,9 @@
     }
 
     .page-header {
-      margin-bottom: 20px;
+      margin-bottom: 22px;
+      padding-bottom: 12px;
+      border-bottom: 1px solid rgba(30, 41, 59, 0.6);
     }
 
     .page-title {
@@ -243,13 +245,15 @@
       align-items: center;
       gap: 10px;
       letter-spacing: -0.3px;
+      line-height: 1.35;
+      padding-bottom: 4px;
     }
 
     .page-meta {
       display: flex;
       flex-wrap: wrap;
-      gap: 10px;
-      margin-top: 8px;
+      gap: 8px;
+      margin-top: 10px;
       color: var(--text-muted);
       font-size: 0.8rem;
     }
@@ -262,6 +266,7 @@
       border: 1px solid var(--border-color);
       padding: 3px 10px;
       border-radius: 5px;
+      line-height: 1.4;
     }
 
     .meta-tag strong {
@@ -870,18 +875,26 @@
         padding: 12px 10px;
       }
 
+      .page-header {
+        margin-bottom: 16px;
+        padding-bottom: 10px;
+      }
+
       .page-title {
-        font-size: 1.25rem;
+        font-size: 1.2rem;
         gap: 6px;
+        line-height: 1.35;
+        padding-bottom: 2px;
       }
 
       .page-meta {
         font-size: 0.75rem;
         gap: 6px;
+        margin-top: 8px;
       }
 
       .meta-tag {
-        padding: 2px 7px;
+        padding: 3px 8px;
         font-size: 0.74rem;
       }
 
@@ -960,8 +973,9 @@
       }
 
       th, td {
-        padding: 7px 8px;
-        white-space: nowrap;
+        padding: 8px 10px;
+        white-space: normal;
+        word-break: normal;
       }
 
       .flow-steps {
@@ -1523,40 +1537,64 @@
           </p>
         </div>
 
-        <div class="card" style="margin-bottom: 20px;">
-          <div class="card-title">🛡️ Special War Protection & Multi-Building Garrison Buff</div>
-          <div class="table-container">
-            <table>
-              <thead>
-                <tr>
-                  <th>Mechanic</th>
-                  <th>How It Works</th>
-                  <th>Strategic Impact</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td><strong>🛡️ Special War Protection</strong></td>
-                  <td>Opens on your home Hall when your realm occupies a foreign Hall or defeats invaders in your home Hall.</td>
-                  <td><strong>Foreign Lords CANNOT attack or occupy your Hall</strong> while active (only domestic Lords can). <em>Note: Hostile Spires still fire cannons!</em></td>
-                </tr>
-                <tr>
-                  <td><strong>⚡ Multi-Building Garrison Buff</strong></td>
-                  <td>Activates when an alliance occupies a building for <strong>1 continuous hour</strong> (requires 2 or more buildings held for at least 20 minutes each).</td>
-                  <td>The more buildings held for 20+ minutes, the greater the stat buff multiplier.</td>
-                </tr>
-                <tr>
-                  <td><strong>⚔️ Weakened Unit Counters</strong></td>
-                  <td>Troop type counter bonuses (Infantry > Cav > Ranged) are <strong>reduced inside the Hall & Spires</strong>.</td>
-                  <td>Pure raw stats and specialized mono-troop hero synergies dominate over basic rock-paper-scissors counters.</td>
-                </tr>
-                <tr>
-                  <td><strong>💰 Colonization & Taxation</strong></td>
-                  <td>Each additional realm colonized grants an extra set of <strong>Emperor's Award Chests</strong>. Colonized realms pay daily resource taxation.</td>
-                  <td>Taxes flow into the <strong>Realm Treasury</strong>, distributed by the Emperor and Aide.</td>
-                </tr>
-              </tbody>
-            </table>
+        <!-- Special War Protection & Multi-Building Garrison Buff Grid -->
+        <div style="margin-bottom: 20px;">
+          <div style="font-size: 1.05rem; font-weight: 800; color: #fff; margin-bottom: 12px; display:flex; align-items:center; gap:8px;">
+            <span>🛡️ Special War Protection & Castle Garrison Rules</span>
+          </div>
+
+          <div class="grid-2">
+            <div class="card">
+              <div class="card-title">
+                <span>🛡️ Special War Protection</span>
+                <span class="badge badge-green">IMMUNITY</span>
+              </div>
+              <p style="font-size:0.84rem; color:var(--text-muted); margin-bottom:6px;">
+                <strong style="color:var(--accent-cyan);">Trigger:</strong> Activates on your home Hall when your realm occupies a foreign Hall or liberates your home Hall.
+              </p>
+              <p style="font-size:0.84rem; color:var(--text-main);">
+                <strong>Rule:</strong> Foreign Lords <strong>CANNOT attack or occupy your Hall</strong> while active (only domestic Lords can). <em>⚠️ Note: Hostile Spires still fire 10-minute artillery cannons!</em>
+              </p>
+            </div>
+
+            <div class="card">
+              <div class="card-title">
+                <span>⚡ Multi-Building Garrison Buff</span>
+                <span class="badge badge-cyan">SCALING STATS</span>
+              </div>
+              <p style="font-size:0.84rem; color:var(--text-muted); margin-bottom:6px;">
+                <strong style="color:var(--accent-cyan);">Trigger:</strong> Holding a building for <strong>1 continuous hour</strong> (requires $\ge 2$ buildings held for $\ge 20$ min each).
+              </p>
+              <p style="font-size:0.84rem; color:var(--text-main);">
+                <strong>Rule:</strong> The more buildings held for $>20$ min, the greater the stat buff multiplier. Flipping an enemy Spire resets their 1-hour timer!
+              </p>
+            </div>
+
+            <div class="card">
+              <div class="card-title">
+                <span>⚔️ Weakened Unit Counters</span>
+                <span class="badge badge-gold">HERO SYNERGY</span>
+              </div>
+              <p style="font-size:0.84rem; color:var(--text-muted); margin-bottom:6px;">
+                <strong style="color:var(--accent-cyan);">Scope:</strong> Active inside the Hall of Might and all 4 Spires.
+              </p>
+              <p style="font-size:0.84rem; color:var(--text-main);">
+                <strong>Rule:</strong> Standard rock-paper-scissors troop counter bonuses are <strong>significantly reduced</strong>. Raw gear, Dragon power, and specialized mono-troop lineups dominate.
+              </p>
+            </div>
+
+            <div class="card">
+              <div class="card-title">
+                <span>💰 Colonization & Treasury Taxes</span>
+                <span class="badge badge-gold">AWARDS & TAXES</span>
+              </div>
+              <p style="font-size:0.84rem; color:var(--text-muted); margin-bottom:6px;">
+                <strong style="color:var(--accent-cyan);">Scope:</strong> Winning Emperor title & colonizing foreign realms.
+              </p>
+              <p style="font-size:0.84rem; color:var(--text-main);">
+                <strong>Rule:</strong> Unlocks extra sets of <strong>Emperor's Award Chests</strong> per colonized realm. Colonized realms pay daily taxes into the <strong>Realm Treasury</strong>.
+              </p>
+            </div>
           </div>
         </div>
       </section>
