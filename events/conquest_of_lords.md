@@ -57,7 +57,7 @@
 ### ⚡ The Multi-Building Garrison Buff & Weakened Counters
 * **Garrison Buff Activation:** When an alliance occupies a building for **1 continuous hour**, they gain the powerful **Garrison Buff**.
   * *Condition:* At least **2 buildings** must be held simultaneously, and each must have been occupied for **at least 20 minutes**.
-  * *Scaling:* The more buildings held for $\ge 20$ minutes, the greater the stat buff multiplier.
+  * *Scaling:* The more buildings held for **20+ minutes**, the greater the stat buff multiplier.
 * **Weakened Unit Counters:** In the Hall of Might and Spires, **the effectiveness of standard unit counter mechanics (Infantry > Cavalry > Ranged) is weakened**. Pure combat stats, dragon power, and specialized mono-troop synergies from your Rally Lead take priority over rock-paper-scissors counters.
 
 ---
