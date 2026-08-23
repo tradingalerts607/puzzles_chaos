@@ -209,10 +209,12 @@ A divided home realm is guaranteed to lose against a united opponent. Establishi
 ### 🏛️ Domestic Realm Cooperation Framework:
 1. **The Realm War Council:** Top 3–5 alliances create a shared Discord War Room or cross-alliance chat group with voice channels active throughout the 24 hours.
 2. **Emperor Title Rotation System:** To prevent internal civil war, top alliances agree to alternate claiming the Emperor crown across consecutive SvS victories (e.g., Alliance A on Week 1, Alliance B on Week 3).
-3. **Zonal Spire Assignments:**
-   - **Primary Alliance (Highest Whales):** Claims the Hall of Might and North Spire.
-   - **Secondary Alliances:** Assigned dedicated ownership and defense of East, West, and South Spires to guarantee 100% artillery suppression.
-4. **Home Defense & Anti-Raider Grid:** Assign 1–2 mid-tier alliances or mobile defense squads to monitor the home realm, hunting down foreign invaders attempting to farm unshielded castles.
+3. **⚠️ The "Friendly Fire" Spire Trap:** The game engine fires Spire cannons whenever a Spire and the Hall are held by **different alliance tags** (even between allied guilds in the same home realm).
+4. **The 3 Coalition Deployment Models:**
+   * **🛡️ Model 1: The Mono-Alliance Lockdown (For 6h Win):** Alliance A (Emperor Guild) holds the Hall **AND all 4 Spires** under the **same alliance tag** $\rightarrow$ **0% Artillery Damage**. Alliance B & C form the mobile defense grid in the Enchanted Woodland, breaking enemy counter-rallies.
+   * **🔄 Model 2: Two-Phase Point Sharing:** Alliance A holds all structures during the initial 6-hour win sprint (10:00–16:00 UTC). Once victory is locked, Alliance A rotates Spires to Alliance B & C for their **4-hour 2,000 occupation milestone points**.
+   * **🤝 Model 3: The 24-Hour Roster Merge:** Active rally fillers from partner alliances temporarily move to Alliance A for the match to garrison together with zero friendly fire.
+5. **Home Defense & Anti-Raider Grid:** Assign 1–2 mid-tier alliances or mobile defense squads to monitor the home realm, hunting down foreign invaders attempting to farm unshielded castles.
 
 ---
 
