@@ -150,24 +150,69 @@ Standings at the end of the 4 rounds are determined by **Colonization Points**:
 
 ---
 
-## 5. Points System, Milestones & Point-Farming Meta
+## 5. Points System, Milestones & 12k Scoring Meta (Peak Duel)
 
-Understanding point generation allows all alliance members—from heavy spenders to F2P—to hit personal tiers and maximize rewards.
+To claim the maximum personal milestone chests, leaderboard rank, and kingdom multipliers, understand the exact point generation math and limits.
 
-### 🎖️ Points Architecture
-| Action | Point Value / Rules | Key Mechanics & Exploits |
+### 🎖️ Points Architecture & Building Time Limits
+| Action | Point Value / Time Required | Max Points / Season Milestones |
 | :--- | :--- | :--- |
-| **Personal Milestone Target** | **12,000 Points** | Unlocks full tier rewards and personal chest rewards. |
-| **Hall of Might Occupation** | **2,000 Points per 2 Hours** | Awarded to the occupying alliance/members holding the Hall. |
-| **Spire Occupation** | **2,000 Points per 4 Hours** | Awarded for holding any of the 4 outer Spires. |
-| **Killing Enemy Units** | Points scale with troop tier (T2 to T12+) | ⚠️ **T1 Units DO NOT grant kill points.** Hunting T1 armies gives 0 points. |
-| **Losing Troops in Battle** | Points awarded for wounded/dead units | 💡 **T1 Units DO count for loss points!** |
+| **Personal Milestone Target** | **12,000 Points** | Clears all personal stages and unlocks top-tier event chests. |
+| **Hall of Might Occupation** | **1.5 Hours (90 min)** to max cap | **2,000 Points Max Cap** (Earned 2x faster than Spires). |
+| **Spire Occupation** | **3.0 Hours (180 min)** to max cap | **2,000 Points Max Cap** (Occupying Hall + Spire shares the 2,000 cap). |
+| **Season Building Hold Milestone** | **> 1,201 Minutes (20 Hours)** | Unlocks **Maximum Season Holding Rewards** (based on Realm Rank). |
+| **Losses: Fallen Units** | **1,000,000 Lost Power = 400 Points** | 💡 **Losses yield 4x MORE points per power than kills!** |
+| **Kills: Defeated Enemy Units** | **1,000,000 Killed Power = 100 Points** | ⚠️ Own-kingdom kills = 0 pts; Enemy T1 kills = 0 pts. |
 
-### 🧪 The "T1 Sacrifice" Point-Farming Tactic
-Because **T1 units count toward loss points** but give **no kill points** to attackers:
-1. **Low-Risk Point Grinding:** Smaller players or F2P members can send pure T1 march waves into controlled defensive battles or contested nodes.
-2. **Negligible Cost & Instant Rebuild:** T1 units cost almost zero resources, train instantaneously, and do not clog up high-tier Medical Tent space.
-3. **Safe Hospital/Sanctuary Buffer:** You can hit the **12,000 Personal Points** milestone rapidly via T1 losses without risking valuable T9–T12 combat stacks.
+---
+
+### 🎯 The 4 Official Ways to Earn Points / Clear Stages
+
+#### 1️⃣ Structure Occupation (Hall & Spires)
+* Capture, hold, or reinforce the Hall of Might or any Spire.
+* **Cap:** Maximum **2,000 points** out of the 12,000 total can be earned from building occupation.
+* **Rate:** **1.5 hours in the Hall** or **3.0 hours in a Spire** maxes out the 2,000 points.
+* **Season Reward:** Maintain $\ge$ 1,201 total minutes (20 hours) across the season for maximum kingdom holding loot.
+
+#### 2️⃣ Destruction of Enemy Troops (Kills)
+* Attack enemy gathering squads on resource tiles inside the Enchanted Woodland.
+* Attack foreign Spires or Hall (if no NAP is active and you hold overwhelming stats).
+* Scout and attack unshielded foreign castles spotted inside the Enchanted Woodland (never station your own castle in the Woodland).
+* ⚠️ **Rules:** Only foreign kingdom kills grant points. Enemy T1 units give **0 kill points**.
+
+#### 3️⃣ Points for Fallen Units (Losses via Sanctuary)
+* Units must be **killed** (bypassing full Medical Tents) so they flow directly into the Sanctuary.
+* ⚠️ **Structure Attack Warning:** When attacking a Spire or Hall, **30% of your fallen troops die permanently (Hard Dead)**!
+* To avoid the 30% hard loss penalty, do not suicide into heavily reinforced structures; instead, take defensive hits or use Method 4.
+
+#### 4️⃣ The "Tile Exchange / Troop Trade" Meta (Guaranteed Safe 12k Points)
+* Partner with an opponent from the Combat Division to trade equal troop casualties on resource tiles (e.g., exchange 100k T10 for 100k T10).
+* **The Execution:** Take turns attacking each other's gathering march on a tile in the Woodland.
+* **Why this is the #1 Scoring Strategy:**
+  1. **Zero 30% Hard Loss:** Tile battles do not have the 30% structure permadeath penalty; 100% of overflow casualties go safely to the Sanctuary.
+  2. **Double MVP Points:** Both players earn massive kill points AND loss points simultaneously.
+  3. **Alliance Duel Synergy:** Kills scored during tile exchanges simultaneously clear high-tier phases in the concurrent **Alliance Duel** event!
+
+---
+
+### 📊 Power-to-Points Math & MVP Kingdom Multipliers
+
+After securing your initial **2,000 occupation points**, the remaining points needed for high multipliers convert as follows:
+
+$$\text{1,000,000 Power Lost} = \mathbf{400\text{ Points}} \quad\Big|\quad \text{1,000,000 Enemy Power Killed} = \mathbf{100\text{ Points}}$$
+
+* *To hit high tiers purely on losses:* Requires $\approx$ **2.6 Million T11** or $\approx$ **3.5 Million T10** casualties (routed to Sanctuary).
+
+#### 👑 Kingdom Reward Multiplier Brackets:
+| MVP Score Bracket | Kingdom Reward Multiplier | Strategic Requirement |
+| :--- | :--- | :--- |
+| **10,000 – 24,999** | **x3 Multiplier** | Standard 12k personal milestone completion. |
+| **25,000 – 29,999** | **x4 Multiplier** | Extended tile exchange or heavy Spire defense. |
+| **30,000 – 34,999** | **x5 Multiplier** | Active whale / high-volume combatant. |
+| **35,000 – 39,999** | **x6 Multiplier** | High-tier alliance rally leaders. |
+| **40,000 – 59,999** | **x7 Multiplier** | Realm champion contenders. |
+| **60,000 – 84,999** | **x8 Multiplier** | Apex leaderboard fighters. |
+| **85,000+** | **x10 Multiplier** | Maximum Realm Multiplier bracket. |
 
 ---
 
@@ -299,14 +344,41 @@ This is the premier growth mechanic in *Puzzles & Chaos*: turning war casualties
 * **Action:** Before 10:00 UTC, fill your Medical Tents to 100% capacity with cheap T1 troops (e.g., attacking a high-level camp or tile with T1s).
 * **Effect:** When your elite T10–T12 combat troops take casualties in the Hall or Spires, they cannot enter the full hospital and are redirected directly into the **Sanctuary**.
 
-#### 2️⃣ The 2-Week Holy Light Revival Cycle
+#### 2️⃣ The 2-Week Holy Light Revival Cycle & Generation Rates
 * Troops in the Sanctuary do not cost gold, food, wood, or speed-ups to recover.
-* Over the **14 days between Conquest of Lords events**, collect and focus **Holy Light** daily via daily active quests and natural generation.
+* **Holy Light Generation Speed:** The passive generation rate of Holy Light directly depends on **how empty your Medical Tents are**.
+  * **Max Rate:** Up to **7,500 Holy Light / Hour** when Medical Tents are completely empty!
+  * 💡 **Post-War Priority:** As soon as the event concludes, immediately heal the wounded T1s in your Medical Tents to maximize your Holy Light regeneration speed!
+* **Daily Quests:** Completing daily task milestones awards **1,000 Holy Light per 1 point of task progress**.
 * By the time the next SvS arrives, your entire original high-tier army has been revived **100% for free**.
 
-#### 3️⃣ The "Post-War Relief" Buff (+300% Training Speed)
+---
+
+### 🏥 The Complete Casualty Overflow Hierarchy
+Where do your troops go when they take casualties in battle?
+
+```
+[ COMBAT CASUALTIES ] ──► [ 1. Medical Tents ] (Capacity: 100% - Filled with T1)
+                                │ (Full - Bypasses)
+                                ▼
+                          [ 2. The Sanctuary ] (Capacity = 100% Medical Tent Size)
+                                │ (Revived 100% Free via Holy Light)
+                                ▼ (If Sanctuary Overflows)
+                          [ 3. Alliance Hospital ] (Up to 100,000 Extra Troops)
+                                │ (Recovered with Alliance Coins & Speed-ups)
+                                ▼ (Exceeding 100k Alliance Hospital)
+                          [ 4. PERMANENT DEATH ] (Hard Dead - Lost Forever)
+```
+
+> ⚠️ **CRITICAL ALLIANCE HOSPITAL WARNING:**
+> If you have troops inside the Alliance Hospital, **DO NOT LEAVE YOUR ALLIANCE!** If you leave or change alliances while troops remain in the Alliance Hospital, **they will be instantly and permanently deleted!**
+
+---
+
+#### 3️⃣ The "Post-War Relief" Buff (+300% Training Speed for 3 Days)
 * Following the conclusion of Conquest of Lords, the game activates the **Post-War Relief** buff:
   * **Buff Value:** **+300% Troop Training Speed**.
+  * **Duration:** Active for **3 Days (72 Hours)**.
   * **Volume Quota:** Covers up to **120% of the total troops lost** during the war.
 
 #### 4️⃣ Post-War Execution: Two Recovery Strategies
@@ -315,7 +387,7 @@ You have two powerful options to exploit the **+300% Post-War Relief** buff and 
 
 | Strategy | Execution Method | Best For / Advantages |
 | :--- | :--- | :--- |
-| **Option A: The T1 Promotion Route** | 1. Heal T1s from Medical Tents (negligible cost).<br>2. **Promote T1s to T10–T12** at +300% speed.<br>3. Revive Sanctuary units via Holy Light. | **Lowest Resource & Speed-up Cost:** Promoting uses vastly fewer speed-ups and resources than raw training. Maximizes efficiency per speed-up hour. |
+| **Option A: The T1 Promotion Route** | 1. Heal T1s from Medical Tents (clears tents for 7,500/hr Holy Light).<br>2. **Promote T1s to T10–T12** at +300% speed.<br>3. Revive Sanctuary units via Holy Light. | **Lowest Resource & Speed-up Cost:** Promoting uses vastly fewer speed-ups and resources than raw training. Maximizes efficiency per speed-up hour. |
 | **Option B: The "Permanent Hospital Plug" Route** | 1. **DO NOT heal the T1s**; leave them parked in Medical Tents permanently.<br>2. **Train brand new T10–T12 troops** from scratch at +300% speed.<br>3. Revive Sanctuary units via Holy Light. | **Zero-Maintenance Security:** Your Medical Tents stay 100% pre-loaded 24/7. You never have to manually wound T1s before the next war, and surprise PvP hits will always route high-tier casualties directly to the Sanctuary! |
 
 * **The Outcome for Both Paths:** You recover 100% of your original army from the Sanctuary for free via Holy Light **PLUS** gain up to 120% in additional high-tier troops through the +300% War Relief training buff—achieving massive net military expansion after every war.
@@ -337,9 +409,9 @@ Never hit "Heal All" if it shows hours or days of healing time during active com
 If your alliance is new or participating in its first few Conquest of Lords matches, follow this survival roadmap:
 
 1. **Do Not Attempt to Solo the Hall of Might:** As a new alliance, competing with consolidated whale guilds for the Hall will result in massive casualties. 
-2. **Focus on Spire Assignments:** Partner with the domestic Realm Council to take ownership of **one single Spire**. Holding a Spire for **4 hours awards 2,000 occupation points** safely.
+2. **Focus on Spire Assignments:** Partner with the domestic Realm Council to take ownership of **one single Spire**. Holding a Spire for **3 hours awards 2,000 occupation points** safely.
 3. **Enforce 100% Alliance Bubble Compliance:** Make 24-hour peace shields mandatory for all members not actively on the battlefield. Foreign raiders actively hunt young alliance hives for easy kills and resources.
-4. **Mandate the T1 Hospital Strategy:** Ensure every member pre-fills their medical tents with T1s and hits their **12,000 personal milestone** using T1 loss runs and occupation ticks.
+4. **Mandate the T1 Hospital Strategy & Tile Exchanges:** Ensure every member pre-fills their medical tents with T1s, hits their **12,000 personal milestone** using safe 1:1 tile trades, and claims the 3-day 300% training buff.
 
 ---
 

@@ -23,14 +23,15 @@ Welcome to the **Puzzles & Chaos: Frozen Castle** master strategy playbook. This
 - ⚔️ **[Conquest of Lords Operational Manual](file:///c:/Users/magus/Documents/gemini_projects/puzzles_chaos/events/conquest_of_lords.md)**:
   - **Schedule & Timing:** Saturday 10:00 AM UTC (24-hour duration, bi-weekly).
   - **Spire Artillery:** 10-minute cannon intervals dealing 1% garrison loss per hostile Spire.
-  - **Scoring Architecture:** 12k personal points milestone, 2,000 occupation points (2h Hall / 4h Spire), kill points vs. T1 loss point mechanics.
+  - **Scoring Architecture & 12k Meta:** 12,000 personal milestone target, 2,000 occupation points cap (1.5h Hall / 3.0h Spire), >1,201-minute season holding reward milestone, 1:1 tile exchange meta (1M Lost Power = 400 pts / 1M Killed = 100 pts), 30% structure attack permadeath warning, and Kingdom MVP Multipliers (x3 up to x10).
   - **Official Battle Rules:** Enchanted Woodland immunity boundary (lords outside woodland cannot be attacked/scouted), Hall Special War Protection (locks out foreign invaders), multi-building Garrison Buffs (scaling after 1h hold), weakened unit counters in structures, extra Emperor award chests per colonized realm, and daily Treasury taxation.
   - **Cross-Realm Diplomacy:** Negotiating pre-war NAPs (safe farm zones, no-tile hitting, Hall-only combat).
-  - **Domestic Realm Coalition:** War Council structure, Emperor rotation, Spire assignments between allied guilds.
+  - **Domestic Realm Coalition:** War Council structure, Emperor rotation, and 3 Deployment Models (Mono-Alliance Lockdown for 0% friendly fire, 2-Phase Rotation for point sharing, and 24h Roster Merge).
   - **Trophy Grade System:** Realm tier progression (Bronze through Master/Legend), matchmaking brackets, trophy win/loss rules, and reward scaling.
   - **🏟️ League Divisions & 9-Realm Tournament:** Preparation vs. League Divisions (Servers 1-36, 37-72, 73-99+), Regular Season vs. Postseason, Championship Mark, Double Postseason Rewards, 4-round round-robin schedule across 3 arenas, and official Colonization Points ranking matrix (+100 for conquest, +25 for hold, 0 for loss).
-  - **The T1 Hospital Pre-Fill Trick:** Intentionally filling medical tents with T1s so T10-T12 casualties flow into the Sanctuary for 100% free revival (Sanctuary capacity = Medical Tent capacity).
-  - **Holy Light & Post-War Relief Growth Loop:** 14-day free Sanctuary recovery via Holy Light + promoting healed T1s under the **+300% War Relief buff** (up to 120% losses) to achieve **net positive military growth** after every war.
-  - **Instant Batch Healing:** Micro-batching heals to get instant 0-second / 0-speedup alliance help clears.
+  - **The Complete Casualty Hierarchy:** Medical Tents (T1 pre-fill) $\rightarrow$ Sanctuary (Capacity = Medical Tents, 100% free Holy Light revival at up to 7,500/hr) $\rightarrow$ Alliance Hospital (up to 100,000 overflow troops) $\rightarrow$ Permanent Death.
+  - **Holy Light & Post-War Relief Growth Loop:** 14-day free Sanctuary recovery + 3-day **+300% War Relief buff** (covering up to 120% losses) to achieve **net positive military growth** after every war.
+  - **Instant Batch Healing:** Micro-batching heals (15–30 min) to get instant 0-second / 0-speedup alliance help clears.
   - **🥊 Asymmetrical Underdog Tactics (vs Whales):** The Spire Bleed (24% loss/hr on enemy Hall), T-3s Ghost Recall trick, 100% T1 point denial, Spire-share damage control NAPs, and Woodland Banishment / Spire buff resets.
+
 
