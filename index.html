@@ -548,45 +548,51 @@
       display: block;
     }
 
-    /* Step flow */
+    /* Step flow (Vertical Step-Down Pipeline) */
     .flow-steps {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-      gap: 14px;
-      margin: 18px 0;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      margin: 16px 0;
     }
 
     .flow-step {
       background-color: #0c1220;
       border: 1px solid #1e293b;
       border-radius: 8px;
-      padding: 16px;
+      padding: 14px 16px 14px 76px;
       position: relative;
+      min-height: 52px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
     }
 
     .flow-step-num {
       position: absolute;
-      top: -10px;
-      left: 14px;
+      left: 12px;
+      top: 50%;
+      transform: translateY(-50%);
       background-color: var(--accent-blue);
       color: #fff;
-      font-size: 0.68rem;
+      font-size: 0.7rem;
       font-weight: 800;
-      padding: 2px 8px;
-      border-radius: 10px;
+      padding: 4px 8px;
+      border-radius: 6px;
+      letter-spacing: 0.5px;
     }
 
     .flow-step-title {
-      font-size: 0.9rem;
+      font-size: 0.92rem;
       font-weight: 700;
       color: #fff;
-      margin-top: 4px;
-      margin-bottom: 6px;
+      margin-bottom: 2px;
     }
 
     .flow-step-desc {
-      font-size: 0.8rem;
+      font-size: 0.82rem;
       color: var(--text-muted);
+      line-height: 1.45;
     }
 
     /* Master Portal & Table of Contents Styles */
@@ -1163,19 +1169,44 @@
             <span>⚔️ Module 1: Conquest of Lords</span>
             <span class="badge badge-green">LIVE</span>
           </div>
-          <p style="font-size:0.86rem; color:var(--text-muted); margin-bottom: 12px;">The premier bi-weekly 24-hour cross-realm expedition for dominion over the Hall of Might, Spires, Emperor Crown, and Realm Treasury.</p>
-          <div class="jump-btn-grid">
-            <button class="jump-btn" onclick="showTab('col-overview')">🏛️ Overview & Win Rules</button>
-            <button class="jump-btn" onclick="showTab('col-mechanics')">🎯 Spire 10m Artillery</button>
-            <button class="jump-btn" onclick="showTab('col-trophies')">🏆 Trophy Grade ELO</button>
-            <button class="jump-btn" onclick="showTab('col-leagues')">🏟️ League & 9-Realm Format</button>
-            <button class="jump-btn" onclick="showTab('col-scoring')">🎖️ 12K Points & T1 Sacrifice</button>
-            <button class="jump-btn" onclick="showTab('col-diplomacy')">🤝 Cross-Realm NAP Mail</button>
-            <button class="jump-btn" onclick="showTab('col-growth')">📈 Sanctuary & 300% War Relief</button>
-            <button class="jump-btn" onclick="showTab('col-starter')">🔰 New Alliance Blueprint</button>
-            <button class="jump-btn" onclick="showTab('col-outmatched')">🥊 Guerrilla Warfare vs Whales</button>
-            <button class="jump-btn" onclick="showTab('tool-calc')">🧮 Battle Math Simulators</button>
-            <button class="jump-btn" onclick="showTab('tool-discord')">📋 1-Click Discord Announcements</button>
+          <p style="font-size:0.86rem; color:var(--text-muted); margin-bottom: 16px;">The premier bi-weekly 24-hour cross-realm expedition for dominion over the Hall of Might, Spires, Emperor Crown, and Realm Treasury.</p>
+          
+          <!-- Category 1: Core Mechanics & Rules -->
+          <div style="margin-bottom: 14px;">
+            <div style="font-size: 0.72rem; font-weight: 800; color: var(--accent-cyan); text-transform: uppercase; letter-spacing: 0.8px; margin-bottom: 6px;">
+              🏛️ 1. Core Mechanics & Victory Rules
+            </div>
+            <div class="jump-btn-grid">
+              <button class="jump-btn" onclick="showTab('col-overview')">🏛️ Overview & Win Rules</button>
+              <button class="jump-btn" onclick="showTab('col-mechanics')">🎯 Spire 10m Artillery</button>
+              <button class="jump-btn" onclick="showTab('col-trophies')">🏆 Trophy Grade ELO</button>
+              <button class="jump-btn" onclick="showTab('col-leagues')">🏟️ League & 9-Realm Format</button>
+            </div>
+          </div>
+
+          <!-- Category 2: Scoring Meta & Growth Loops -->
+          <div style="margin-bottom: 14px;">
+            <div style="font-size: 0.72rem; font-weight: 800; color: var(--accent-gold); text-transform: uppercase; letter-spacing: 0.8px; margin-bottom: 6px;">
+              ⚔️ 2. Scoring Meta & Growth Loops
+            </div>
+            <div class="jump-btn-grid">
+              <button class="jump-btn" onclick="showTab('col-scoring')">🎖️ 12K Points & Tile Trading</button>
+              <button class="jump-btn" onclick="showTab('col-growth')">📈 Sanctuary & 300% War Relief</button>
+              <button class="jump-btn" onclick="showTab('col-starter')">🔰 New Alliance Blueprint</button>
+              <button class="jump-btn" onclick="showTab('col-outmatched')">🥊 Guerrilla Warfare vs Whales</button>
+            </div>
+          </div>
+
+          <!-- Category 3: Coalition Tools & Diplomacy -->
+          <div>
+            <div style="font-size: 0.72rem; font-weight: 800; color: var(--accent-green); text-transform: uppercase; letter-spacing: 0.8px; margin-bottom: 6px;">
+              🛠️ 3. Coalition Tools & Diplomacy
+            </div>
+            <div class="jump-btn-grid">
+              <button class="jump-btn" onclick="showTab('col-diplomacy')">🤝 Cross-Realm NAP Mail</button>
+              <button class="jump-btn" onclick="showTab('tool-calc')">🧮 Battle Math Simulators</button>
+              <button class="jump-btn" onclick="showTab('tool-discord')">📋 1-Click Discord Announcements</button>
+            </div>
           </div>
         </div>
 
