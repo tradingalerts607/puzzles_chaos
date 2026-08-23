@@ -31,5 +31,5 @@ Welcome to the **Puzzles & Chaos: Frozen Castle** master strategy playbook. This
   - **The T1 Hospital Pre-Fill Trick:** Intentionally filling medical tents with T1s so T10-T12 casualties flow into the Sanctuary for 100% free revival (Sanctuary capacity = Medical Tent capacity).
   - **Holy Light & Post-War Relief Growth Loop:** 14-day free Sanctuary recovery via Holy Light + promoting healed T1s under the **+300% War Relief buff** (up to 120% losses) to achieve **net positive military growth** after every war.
   - **Instant Batch Healing:** Micro-batching heals to get instant 0-second / 0-speedup alliance help clears.
-  - **New Alliance Starter Blueprint:** Tactical roadmap for growing alliances to secure Spire points and protect their members.
-  - **🥊 Asymmetrical Underdog Tactics (vs Whales):** The Spire Bleed (24% loss/hr on enemy Hall), T-3s Ghost Recall trick, 100% T1 point denial, Spire-share damage control NAPs, and cross-realm farm raiding.
+  - **🥊 Asymmetrical Underdog Tactics (vs Whales):** The Spire Bleed (24% loss/hr on enemy Hall), T-3s Ghost Recall trick, 100% T1 point denial, Spire-share damage control NAPs, and Woodland Banishment / Spire buff resets.
+

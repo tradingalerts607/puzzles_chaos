@@ -361,10 +361,10 @@ When matched against an older, hyper-consolidated, or high-spending whale realm,
                │                                                               │
                └───────────────────────────────┬───────────────────────────────┘
                                                ▼
-                              [ TACTIC 3: CROSS-REALM GUERRILLA ]
-                              • Whales are stuck in combat center
-                              • Fast raiders jump to enemy realm
-                              • Zero unshielded farm castles & loot RSS
+                              [ TACTIC 3: WOODLAND DISRUPTION ]
+                              • Whales are locked in combat center
+                              • Snipe unshielded filler castles in Woodland
+                              • Defeat = Instantly banished to home realm
 ```
 
 ### 1️⃣ The "Spire Bleed" Strategy (Death by Artillery)
@@ -395,11 +395,11 @@ If the stat disparity is insurmountable:
   2. **Strict No-Raid Pact:** Enemy agrees not to scout or burn home realm castles.
 * **Why Whales Agree:** It guarantees them a low-stress, low-casualty Emperor win without having to burn millions in healing speeds defending against 24-hour Spire harassment.
 
-### 5️⃣ Cross-Realm Guerrilla Raid (Hit & Run Farm Hunting)
-* While enemy whales and top fighters are preoccupied defending or contesting the Hall of Might:
-  * Deploy 2–3 fast, mobile raiders into the **enemy's home realm**.
-  * Sweep their outer zones to find unshielded secondary castles and resource farms.
-  * Rapidly loot hundreds of millions in open resources and port back before enemy defense squads can react.
+### 5️⃣ Woodland Banishment Strikes & Spire Buff Disruption
+* **Why outer farm hunting does not work:** By game rules, castles **situated outside the Enchanted Woodland CANNOT be attacked or scouted** by foreign invaders.
+* **The Legitimate Guerrilla Target:**
+  * **Woodland Banishment Sniping:** Scan exclusively inside the Enchanted Woodland for foreign rally fillers who let their shields drop or logged off. Zeroing their castle immediately **banishes them back to their home realm**, stripping the enemy whale of rally fillers.
+  * **Spire Buff Resets:** Launch fast solo cavalry flips into unattended foreign Spires. Holding the Spire for even a few seconds **instantly resets their 1-Hour Multi-Building Garrison Buff** timer and re-arms the 10-minute artillery cannons against their Hall!
 
 ---
 
