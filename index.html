@@ -670,6 +670,67 @@
       color: var(--text-muted);
       line-height: 1.45;
     }
+
+    /* Trophy Grade Stepper & Interactive Details */
+    .tier-stepper {
+      display: grid;
+      grid-template-columns: repeat(6, 1fr);
+      gap: 8px;
+      margin: 14px 0 10px;
+    }
+
+    @media (max-width: 900px) {
+      .tier-stepper {
+        grid-template-columns: repeat(3, 1fr);
+      }
+    }
+
+    @media (max-width: 480px) {
+      .tier-stepper {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    .tier-badge {
+      background: #0e172a;
+      border: 1px solid var(--border-color);
+      border-radius: 8px;
+      padding: 10px 6px;
+      text-align: center;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      user-select: none;
+    }
+
+    .tier-badge:hover {
+      background: #162238;
+      border-color: var(--accent-cyan);
+      transform: translateY(-2px);
+    }
+
+    .tier-badge.active {
+      background: linear-gradient(180deg, rgba(56, 189, 248, 0.15), rgba(15, 23, 42, 0.9));
+      border-color: var(--accent-cyan);
+      box-shadow: 0 0 12px rgba(56, 189, 248, 0.2);
+    }
+
+    .tier-badge.tier-platinum { border-color: rgba(56, 189, 248, 0.5); }
+    .tier-badge.tier-diamond { border-color: rgba(168, 85, 247, 0.5); }
+    .tier-badge.tier-legend { border-color: rgba(245, 158, 11, 0.5); }
+
+    .tier-icon { font-size: 1.3rem; margin-bottom: 2px; }
+    .tier-name { font-size: 0.8rem; font-weight: 700; color: #fff; }
+    .tier-desc { font-size: 0.65rem; color: var(--text-muted); margin-top: 2px; }
+
+    .tier-detail-panel {
+      background: #090d16;
+      border: 1px solid #1e2e4a;
+      border-left: 3px solid var(--accent-cyan);
+      border-radius: 8px;
+      padding: 12px 16px;
+      margin-top: 8px;
+      animation: fadeIn 0.2s ease;
+    }
   </style>
 </head>
 <body>
@@ -1280,14 +1341,50 @@
         </div>
 
         <div class="card" style="margin-bottom: 24px;">
-          <div class="card-title">📈 Progression Tiers</div>
-          <div style="display:flex; justify-content:space-between; flex-wrap:wrap; gap:10px; padding: 14px 0; text-align:center;">
-            <div style="flex:1; background:#1e293b; padding:10px; border-radius:8px;">🥉 <strong>Bronze</strong></div>
-            <div style="flex:1; background:#1e293b; padding:10px; border-radius:8px;">🥈 <strong>Silver</strong></div>
-            <div style="flex:1; background:#1e293b; padding:10px; border-radius:8px;">🥇 <strong>Gold</strong></div>
-            <div style="flex:1; background:#1e293b; padding:10px; border-radius:8px; border:1px solid #38bdf8;">💎 <strong>Platinum</strong></div>
-            <div style="flex:1; background:#1e293b; padding:10px; border-radius:8px; border:1px solid #a855f7;">🔮 <strong>Diamond</strong></div>
-            <div style="flex:1; background:#1e293b; padding:10px; border-radius:8px; border:1px solid #f59e0b;">👑 <strong>Master / Legend</strong></div>
+          <div class="card-title">
+            <span>📈 Realm Trophy Progression Tiers</span>
+            <span class="badge badge-cyan">Click a Tier to Inspect</span>
+          </div>
+          <p style="font-size:0.84rem; color:var(--text-muted); margin-bottom:8px;">Realms are matched against opponents in the same Trophy Grade bracket. Click any tier below to view details:</p>
+          
+          <div class="tier-stepper">
+            <div id="tier-btn-bronze" class="tier-badge" onclick="selectTier('bronze')">
+              <div class="tier-icon">🥉</div>
+              <div class="tier-name">Bronze</div>
+              <div class="tier-desc">Early Realm</div>
+            </div>
+            <div id="tier-btn-silver" class="tier-badge" onclick="selectTier('silver')">
+              <div class="tier-icon">🥈</div>
+              <div class="tier-name">Silver</div>
+              <div class="tier-desc">Developing</div>
+            </div>
+            <div id="tier-btn-gold" class="tier-badge" onclick="selectTier('gold')">
+              <div class="tier-icon">🥇</div>
+              <div class="tier-name">Gold</div>
+              <div class="tier-desc">Competitive</div>
+            </div>
+            <div id="tier-btn-platinum" class="tier-badge tier-platinum active" onclick="selectTier('platinum')">
+              <div class="tier-icon">💎</div>
+              <div class="tier-name">Platinum</div>
+              <div class="tier-desc">High Power</div>
+            </div>
+            <div id="tier-btn-diamond" class="tier-badge tier-diamond" onclick="selectTier('diamond')">
+              <div class="tier-icon">🔮</div>
+              <div class="tier-name">Diamond</div>
+              <div class="tier-desc">Whale Tier</div>
+            </div>
+            <div id="tier-btn-legend" class="tier-badge tier-legend" onclick="selectTier('legend')">
+              <div class="tier-icon">👑</div>
+              <div class="tier-name">Master / Legend</div>
+              <div class="tier-desc">Apex Bracket</div>
+            </div>
+          </div>
+
+          <div id="tierDetailBox" class="tier-detail-panel">
+            <div id="tierDetailTitle" style="font-weight:700; color:var(--accent-cyan); font-size:0.9rem;">💎 Platinum Tier (High Power Realm Bracket)</div>
+            <div id="tierDetailText" style="font-size:0.83rem; color:var(--text-muted); margin-top:4px; line-height:1.45;">
+              Features established T11/T12 rosters and active multi-alliance coalitions. Defense and Spire artillery coordination is mandatory. Victory awards expanded Emperor Chest allocations and accelerated season points.
+            </div>
           </div>
         </div>
 
@@ -1843,6 +1940,51 @@ Leadership of Realm [Y]</div>
         points = Math.floor((hours / 4) * 2000);
       }
       document.getElementById('occResultPts').innerText = points.toLocaleString() + ' PTS';
+    }
+
+    function selectTier(tier) {
+      const tierData = {
+        bronze: {
+          title: "🥉 Bronze Tier (Early Development Bracket)",
+          text: "Entry-level bracket for newer realms and developing rosters (T8/T9 focus). Focus is on mastering basic rally timings, T1 milestone farming, and establishing domestic alliance cooperation without aggressive foreign invasions."
+        },
+        silver: {
+          title: "🥈 Silver Tier (Developing Realm Bracket)",
+          text: "Intermediate realm bracket where alliances transition to T9/T10 troop compositions. Cross-realm NAPs become critical to protect gathering nodes while contesting the Hall and Spires."
+        },
+        gold: {
+          title: "🥇 Gold Tier (Competitive Realm Bracket)",
+          text: "Active combat tier with widespread T10/T11 armies. Alliances must strictly enforce mono-troop rallies, the T1 Hospital pre-fill loop, and instant batch-healing discipline to sustain long sieges."
+        },
+        platinum: {
+          title: "💎 Platinum Tier (High Power Realm Bracket)",
+          text: "Features established T11/T12 rosters and active multi-alliance coalitions. Defense and Spire artillery coordination is mandatory. Victory awards expanded Emperor Chest allocations and accelerated season points."
+        },
+        diamond: {
+          title: "🔮 Diamond Tier (Whale & Heavy Spender Bracket)",
+          text: "Elite tier with maxed Dragon skills, +10 Curios, and heavy spender rallies. Conventional defense is ineffective; underdog realms must pivot to 100% T1 point-denial, Spire Bleed artillery, and the T-3s Ghost Recall trick."
+        },
+        legend: {
+          title: "👑 Master / Legend Tier (Apex Championship Bracket)",
+          text: "The highest competitive rank in Cross-Realm Warfare. Full 24-hour shift rotations, multi-whale defensive anchors, and total Spire monopoly are required to claim and hold the Emperor title."
+        }
+      };
+
+      const data = tierData[tier];
+      if (!data) return;
+
+      // Update badge active states
+      document.querySelectorAll('.tier-badge').forEach(b => b.classList.remove('active'));
+      const activeBtn = document.getElementById('tier-btn-' + tier);
+      if (activeBtn) activeBtn.classList.add('active');
+
+      // Update detail box
+      const titleEl = document.getElementById('tierDetailTitle');
+      const textEl = document.getElementById('tierDetailText');
+      if (titleEl && textEl) {
+        titleEl.innerText = data.title;
+        textEl.innerText = data.text;
+      }
     }
 
     function handleSearch() {
