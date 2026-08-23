@@ -578,6 +578,98 @@
       font-size: 0.8rem;
       color: var(--text-muted);
     }
+
+    /* Master Portal & Table of Contents Styles */
+    .portal-banner {
+      background: linear-gradient(135deg, rgba(56, 189, 248, 0.15) 0%, rgba(30, 41, 59, 0.8) 100%);
+      border: 1px solid rgba(56, 189, 248, 0.3);
+      border-radius: 12px;
+      padding: 20px 24px;
+      margin-bottom: 24px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 16px;
+    }
+
+    .portal-banner-title {
+      font-size: 1.35rem;
+      font-weight: 800;
+      color: #fff;
+    }
+
+    .portal-banner-desc {
+      font-size: 0.86rem;
+      color: var(--text-muted);
+      margin-top: 4px;
+      max-width: 650px;
+    }
+
+    .jump-btn-grid {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 10px;
+    }
+
+    .jump-btn {
+      background-color: #0d1527;
+      border: 1px solid #1e2e4f;
+      color: #cbd5e1;
+      padding: 5px 12px;
+      border-radius: 6px;
+      font-size: 0.78rem;
+      font-weight: 600;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      transition: all 0.15s ease;
+    }
+
+    .jump-btn:hover {
+      background-color: var(--accent-blue);
+      border-color: var(--accent-cyan);
+      color: #fff;
+      transform: translateY(-1px);
+    }
+
+    /* Term & Glossary Cards */
+    .term-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 14px;
+      margin-top: 14px;
+    }
+
+    .term-card {
+      background-color: #0e172a;
+      border: 1px solid #1e293b;
+      border-radius: 8px;
+      padding: 14px 16px;
+      transition: border-color 0.2s;
+    }
+
+    .term-card:hover {
+      border-color: var(--accent-cyan);
+    }
+
+    .term-name {
+      font-size: 0.92rem;
+      font-weight: 700;
+      color: var(--accent-cyan);
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      margin-bottom: 4px;
+    }
+
+    .term-desc {
+      font-size: 0.82rem;
+      color: var(--text-muted);
+      line-height: 1.45;
+    }
   </style>
 </head>
 <body>
@@ -588,13 +680,23 @@
       <div class="brand-title">
         <span>⚔️ P&C WAR ROOM</span>
       </div>
-      <div class="brand-subtitle">Frozen Castle Master Playbook</div>
+      <div class="brand-subtitle">Frozen Castle Strategy Portal</div>
     </div>
 
     <div class="nav-group">
-      <div class="nav-label">Cross-Realm Warfare</div>
-      <div class="nav-item active" onclick="showTab('col-overview')">
-        <span>🏛️</span> Conquest of Lords (SvS)
+      <div class="nav-label">Master Portal</div>
+      <div class="nav-item active" onclick="showTab('hub-toc')">
+        <span>📚</span> Table of Contents
+      </div>
+      <div class="nav-item" onclick="showTab('hub-glossary')">
+        <span>📖</span> Terms & Glossary
+      </div>
+    </div>
+
+    <div class="nav-group">
+      <div class="nav-label">⚔️ Conquest of Lords</div>
+      <div class="nav-item" onclick="showTab('col-overview')">
+        <span>🏛️</span> Overview & Victory
       </div>
       <div class="nav-item" onclick="showTab('col-mechanics')">
         <span>🎯</span> Spires & 10m Cannons
@@ -603,16 +705,16 @@
         <span>🏆</span> Trophy Grade System
       </div>
       <div class="nav-item" onclick="showTab('col-leagues')">
-        <span>🏟️</span> League Divisions & 9-Realm
+        <span>🏟️</span> League & 9-Realm
       </div>
       <div class="nav-item" onclick="showTab('col-scoring')">
-        <span>🎖️</span> 12K Points & T1 Farming
+        <span>🎖️</span> 12K Points & T1 Meta
       </div>
       <div class="nav-item" onclick="showTab('col-diplomacy')">
         <span>🤝</span> NAP & Realm Coalition
       </div>
       <div class="nav-item" onclick="showTab('col-growth')">
-        <span>📈</span> Sanctuary & War Relief Loop
+        <span>📈</span> Sanctuary & Relief Loop
       </div>
       <div class="nav-item" onclick="showTab('col-starter')">
         <span>🔰</span> New Alliance Blueprint
@@ -623,9 +725,25 @@
     </div>
 
     <div class="nav-group">
+      <div class="nav-label">👑 Upcoming Playbooks</div>
+      <div class="nav-item" onclick="showTab('guide-acelord')">
+        <span>👑</span> Ace Lord Guide
+      </div>
+      <div class="nav-item" onclick="showTab('guide-dragonarena')">
+        <span>🐉</span> Dragon Arena
+      </div>
+      <div class="nav-item" onclick="showTab('guide-herometa')">
+        <span>🛡️</span> Hero & Troop Meta
+      </div>
+      <div class="nav-item" onclick="showTab('guide-economyrush')">
+        <span>🏰</span> Economy & Castle Rush
+      </div>
+    </div>
+
+    <div class="nav-group">
       <div class="nav-label">Interactive Tools</div>
       <div class="nav-item" onclick="showTab('tool-calc')">
-        <span>🧮</span> SvS Points & Spire Sim
+        <span>🧮</span> Battle Calculators
       </div>
       <div class="nav-item" onclick="showTab('tool-discord')">
         <span>📋</span> Discord Copy Tools
@@ -652,8 +770,313 @@
 
     <div class="content-area">
 
+      <!-- ================= TAB: MASTER TABLE OF CONTENTS & WAR PORTAL ================= -->
+      <section id="hub-toc" class="tab-content active">
+        <div class="portal-banner">
+          <div>
+            <div class="portal-banner-title">📚 Puzzles & Chaos: Alliance War Room & Strategy Portal</div>
+            <div class="portal-banner-desc">Master operational guides, battle-tested mechanics, calculators, and growth blueprints for Alliance Leadership and competitive players.</div>
+          </div>
+          <div>
+            <button class="jump-btn" onclick="showTab('hub-glossary')" style="padding:8px 16px; background:var(--accent-blue); color:#fff; border-color:var(--accent-cyan);">📖 Open Strategy Glossary</button>
+          </div>
+        </div>
+
+        <div class="card" style="margin-bottom: 20px;">
+          <div class="card-title">
+            <span>⚔️ Module 1: Conquest of Lords (Cross-Realm SvS Warfare)</span>
+            <span class="badge badge-green">COMPLETE & LIVE</span>
+          </div>
+          <p style="font-size:0.86rem; color:var(--text-muted); margin-bottom: 12px;">The premier bi-weekly 24-hour cross-realm expedition for dominion over the Hall of Might, Spires, Emperor Crown, and Realm Treasury.</p>
+          <div class="jump-btn-grid">
+            <button class="jump-btn" onclick="showTab('col-overview')">🏛️ Overview & Win Rules</button>
+            <button class="jump-btn" onclick="showTab('col-mechanics')">🎯 Spire 10m Artillery</button>
+            <button class="jump-btn" onclick="showTab('col-trophies')">🏆 Trophy Grade ELO</button>
+            <button class="jump-btn" onclick="showTab('col-leagues')">🏟️ League & 9-Realm Format</button>
+            <button class="jump-btn" onclick="showTab('col-scoring')">🎖️ 12K Points & T1 Sacrifice</button>
+            <button class="jump-btn" onclick="showTab('col-diplomacy')">🤝 Cross-Realm NAP Mail</button>
+            <button class="jump-btn" onclick="showTab('col-growth')">📈 Sanctuary & 300% War Relief</button>
+            <button class="jump-btn" onclick="showTab('col-starter')">🔰 New Alliance Blueprint</button>
+            <button class="jump-btn" onclick="showTab('col-outmatched')">🥊 Guerrilla Warfare vs Whales</button>
+            <button class="jump-btn" onclick="showTab('tool-calc')">🧮 Battle Math Simulators</button>
+            <button class="jump-btn" onclick="showTab('tool-discord')">📋 1-Click Discord Announcements</button>
+          </div>
+        </div>
+
+        <div class="grid-2" style="margin-bottom: 20px;">
+          <div class="card">
+            <div class="card-title">
+              <span>👑 Module 2: Ace Lord Master Guide</span>
+              <span class="badge badge-gold">IN PROGRESS</span>
+            </div>
+            <p style="font-size:0.85rem; color:var(--text-muted);">Comprehensive 7-day stage calendar, resource hoarding schedules, diamond efficiency calculations, and optimal sprint timings for F2P and spenders.</p>
+            <div class="jump-btn-grid" style="margin-top:12px;">
+              <button class="jump-btn" onclick="showTab('guide-acelord')">🔍 View Ace Lord Overview</button>
+            </div>
+          </div>
+
+          <div class="card">
+            <div class="card-title">
+              <span>🐉 Module 3: Dragon Arena & Alliance Clash</span>
+              <span class="badge badge-gold">IN PROGRESS</span>
+            </div>
+            <p style="font-size:0.85rem; color:var(--text-muted);">20v20 / 30v30 tactical node control, blessing towers, crystal holding point optimization, roster assignment, and rapid redeployment rotations.</p>
+            <div class="jump-btn-grid" style="margin-top:12px;">
+              <button class="jump-btn" onclick="showTab('guide-dragonarena')">🔍 View Dragon Arena Overview</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="grid-2" style="margin-bottom: 20px;">
+          <div class="card">
+            <div class="card-title">
+              <span>🛡️ Module 4: Hero & Troop Mono-Meta</span>
+              <span class="badge badge-gold">IN PROGRESS</span>
+            </div>
+            <p style="font-size:0.85rem; color:var(--text-muted);">Pure Cavalry / Infantry / Ranged specialization guide. Best 5-Hero lineups for F2P vs Spenders, Dragon talents, Runes, and Curio synergies.</p>
+            <div class="jump-btn-grid" style="margin-top:12px;">
+              <button class="jump-btn" onclick="showTab('guide-herometa')">🔍 View Hero Meta Overview</button>
+            </div>
+          </div>
+
+          <div class="card">
+            <div class="card-title">
+              <span>🏰 Module 5: Economy, Castle Rush & Farm Management</span>
+              <span class="badge badge-gold">IN PROGRESS</span>
+            </div>
+            <p style="font-size:0.85rem; color:var(--text-muted);">Castle 1–30+ prerequisite rush roadmap, resource warehouse protection, secondary farm account routing, and perpetual Sanctuary cycling.</p>
+            <div class="jump-btn-grid" style="margin-top:12px;">
+              <button class="jump-btn" onclick="showTab('guide-economyrush')">🔍 View Economy Guide</button>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ================= TAB: MASTER GLOSSARY & REFERENCE ================= -->
+      <section id="hub-glossary" class="tab-content">
+        <div class="page-header">
+          <h1 class="page-title">📖 Master Strategy Glossary & Terminology</h1>
+          <div class="page-meta">
+            <div class="meta-tag">⚡ Quick Warfare & Game Mechanics Reference</div>
+          </div>
+        </div>
+
+        <div class="term-grid">
+          <div class="term-card">
+            <div class="term-name">🌲 Enchanted Woodland</div>
+            <div class="term-desc">The central combat zone surrounding the Hall of Might. Castles located <strong>outside the Enchanted Woodland CANNOT be attacked or scouted</strong> by foreign realm invaders. Defeated invaders inside are banished home.</div>
+          </div>
+
+          <div class="term-card">
+            <div class="term-name">👑 Garrison Captaincy</div>
+            <div class="term-desc">The combat mechanic where <strong>all troops garrisoned inside a structure inherit the stats, dragon power, gear, and hero buffs of the primary Rally Leader</strong>. Garrison fillers only provide troop numbers and tier strength.</div>
+          </div>
+
+          <div class="term-card">
+            <div class="term-name">🎯 Spire Cannon Barrage</div>
+            <div class="term-desc">Automatic artillery fired every <strong>10 minutes</strong> from occupied Spires. Each hostile Spire deals a direct <strong>1% garrison loss</strong> to troops inside the Hall of Might (up to 24% loss/hr from 4 enemy spires).</div>
+          </div>
+
+          <div class="term-card">
+            <div class="term-name">🏥 T1 Hospital Pre-Fill Trick</div>
+            <div class="term-desc">The tactic of filling 100% of Medical Tents with cheap T1s before war. Because <strong>Sanctuary Capacity = Medical Tent Capacity</strong>, all high-tier casualties bypass the hospital and flow safely into Sanctuary for free Holy Light revival.</div>
+          </div>
+
+          <div class="term-card">
+            <div class="term-name">🌟 Holy Light Revival</div>
+            <div class="term-desc">Free revival currency collected daily via quests over the 14-day inter-war cycle. Revives 100% of troops stored in the Sanctuary with <strong>0 resources and 0 speed-ups</strong>.</div>
+          </div>
+
+          <div class="term-card">
+            <div class="term-name">📈 Post-War Relief Buff</div>
+            <div class="term-desc">A <strong>+300% Troop Training Speed</strong> buff activated after Conquest of Lords that covers up to <strong>120% of your total troop losses</strong>, enabling massive net army expansion when promoting healed T1s.</div>
+          </div>
+
+          <div class="term-card">
+            <div class="term-name">👻 T-3s Ghost Node Recall</div>
+            <div class="term-desc">Recalling all garrisoned troops from a Spire exactly 3 seconds before an enemy whale rally lands, causing them to strike an empty node and waste their rally, march speeds, and stamina for 0 kill points.</div>
+          </div>
+
+          <div class="term-card">
+            <div class="term-name">🛡️ Special War Protection</div>
+            <div class="term-desc">Activated on your home Hall when your realm occupies a foreign Hall or liberates your home Hall. <strong>Foreign lords cannot attack or occupy it</strong> while active (only domestic lords can).</div>
+          </div>
+
+          <div class="term-card">
+            <div class="term-name">⚡ Multi-Building Garrison Buff</div>
+            <div class="term-desc">Activated when an alliance holds a building for 1 continuous hour (requires 2 or more buildings held for at least 20 min each). Grants scaling defense and attack multipliers.</div>
+          </div>
+
+          <div class="term-card">
+            <div class="term-name">🐴 Mono-Troop Garrison</div>
+            <div class="term-desc">Reinforcing a structure with <strong>100% of the single troop type matching the Garrison Captain</strong> (e.g. Pure Cavalry). Mixing troop types ("rainbow") dilutes hero passives and causes catastrophic losses.</div>
+          </div>
+
+          <div class="term-card">
+            <div class="term-name">🕊️ Cross-Realm NAP</div>
+            <div class="term-desc">Non-Aggression Pact negotiated between realm leaders before SvS to restrict fighting exclusively to the Hall/Spires and ban tile-hitting and farm raiding.</div>
+          </div>
+
+          <div class="term-card">
+            <div class="term-name">💰 Realm Treasury & Colonization</div>
+            <div class="term-desc">Taxation revenue collected daily from colonized foreign realms into the victor's Treasury, distributed by the Emperor and their appointed Aide.</div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ================= TAB: UPCOMING ACE LORD GUIDE ================= -->
+      <section id="guide-acelord" class="tab-content">
+        <div class="page-header">
+          <h1 class="page-title">👑 Ace Lord Master Playbook</h1>
+          <div class="page-meta">
+            <div class="meta-tag">📅 <strong>Cycle:</strong> 7-Day Recurring Event</div>
+            <div class="meta-tag">💎 <strong>Objective:</strong> Maximum Point Efficiency & Hoarding Rotations</div>
+          </div>
+        </div>
+
+        <div class="alert alert-pro">
+          <div class="alert-icon">📌</div>
+          <div>
+            <strong>PLAYBOOK IN ACTIVE DEVELOPMENT:</strong> Detailed stage-by-stage diamond calculations, speedup hoarding cycles, and daily milestone schedules are currently being compiled.
+          </div>
+        </div>
+
+        <div class="grid-2">
+          <div class="card">
+            <div class="card-title">📅 7-Day Stage Structure</div>
+            <ul style="margin-left: 20px; color: var(--text-muted); font-size: 0.88rem; display:flex; flex-direction:column; gap:8px;">
+              <li><strong>Day 1:</strong> Resource Gathering & Economy Push</li>
+              <li><strong>Day 2:</strong> Building & Research Power Sprint</li>
+              <li><strong>Day 3:</strong> Troop Training & Promotion Rush</li>
+              <li><strong>Day 4:</strong> Hero Growth, Shards & Star Promotion</li>
+              <li><strong>Day 5:</strong> Gear, Runes & Curio Enhancement</li>
+              <li><strong>Day 6 & 7:</strong> Ultimate Showdown (All Categories Combined + SvS)</li>
+            </ul>
+          </div>
+
+          <div class="card">
+            <div class="card-title">💡 Core Hoarding Rules</div>
+            <p style="font-size:0.86rem; color:var(--text-muted);">
+              • Never spend universal speedups outside of their dedicated Ace Lord stage.<br>
+              • Pre-start 7-day+ research and building upgrades so they complete precisely during Day 2.<br>
+              • Save all Hero Shards, Runes, and Curio chests for Day 4 & Day 5 sprints.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <!-- ================= TAB: UPCOMING DRAGON ARENA ================= -->
+      <section id="guide-dragonarena" class="tab-content">
+        <div class="page-header">
+          <h1 class="page-title">🐉 Dragon Arena & Alliance Clash</h1>
+          <div class="page-meta">
+            <div class="meta-tag">⚔️ <strong>Type:</strong> 20v20 / 30v30 Alliance GvG</div>
+            <div class="meta-tag">🎯 <strong>Objective:</strong> Node Control & Crystal Transport</div>
+          </div>
+        </div>
+
+        <div class="alert alert-pro">
+          <div class="alert-icon">📌</div>
+          <div>
+            <strong>PLAYBOOK IN ACTIVE DEVELOPMENT:</strong> Alliance roster deployments, teleport cooldown management, and scoring math will be detailed here.
+          </div>
+        </div>
+
+        <div class="grid-2">
+          <div class="card">
+            <div class="card-title">🏰 Key Arena Objectives</div>
+            <ul style="margin-left: 20px; color: var(--text-muted); font-size: 0.88rem; display:flex; flex-direction:column; gap:8px;">
+              <li><strong>Dragon Altar (Center):</strong> Highest continuous point generation.</li>
+              <li><strong>Blessing Towers:</strong> Grant 50% attack and march speed buffs to controlling alliance.</li>
+              <li><strong>Dragon Crystal Caravans:</strong> High-value payload escorts across the central bridge.</li>
+              <li><strong>Sanctuary Outposts:</strong> Secondary point anchors for mobile skirmishers.</li>
+            </ul>
+          </div>
+
+          <div class="card">
+            <div class="card-title">⚡ Squad Breakdown</div>
+            <p style="font-size:0.86rem; color:var(--text-muted);">
+              • <strong>Alpha Squad:</strong> Heavy whales holding Dragon Altar.<br>
+              • <strong>Bravo Squad:</strong> Fast cavalry capturing and rotating Blessing Towers.<br>
+              • <strong>Charlie Squad:</strong> Escort team dedicated to crystal transport and node denial.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <!-- ================= TAB: UPCOMING HERO & TROOP META ================= -->
+      <section id="guide-herometa" class="tab-content">
+        <div class="page-header">
+          <h1 class="page-title">🛡️ Hero & Troop Mono-Specialization Meta</h1>
+          <div class="page-meta">
+            <div class="meta-tag">🏹 <strong>Focus:</strong> Mono-Cavalry, Mono-Infantry, Mono-Ranged</div>
+            <div class="meta-tag">⚔️ <strong>Synergy:</strong> 5-Hero Lineups, Curios & Dragons</div>
+          </div>
+        </div>
+
+        <div class="alert alert-pro">
+          <div class="alert-icon">📌</div>
+          <div>
+            <strong>PLAYBOOK IN ACTIVE DEVELOPMENT:</strong> Complete hero tier lists, 5-man team compositions for F2P vs Spenders, and dragon talent trees are coming in the next release.
+          </div>
+        </div>
+
+        <div class="grid-3">
+          <div class="card">
+            <div class="card-title">🐴 Cavalry Specialization</div>
+            <p style="font-size:0.85rem; color:var(--text-muted);">Highest march speed, critical strike burst damage, ideal for open-field skirmishing and quick node flipping.</p>
+          </div>
+          <div class="card">
+            <div class="card-title">🛡️ Infantry Specialization</div>
+            <p style="font-size:0.85rem; color:var(--text-muted);">Maximum defense and health pool. Unmatched frontline garrison tanking for the Hall of Might and Spires.</p>
+          </div>
+          <div class="card">
+            <div class="card-title">🏹 Ranged Specialization</div>
+            <p style="font-size:0.85rem; color:var(--text-muted);">High sustained DPS and siege breaking power. Dominates large-scale rally assaults against fortified positions.</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- ================= TAB: UPCOMING ECONOMY & CASTLE RUSH ================= -->
+      <section id="guide-economyrush" class="tab-content">
+        <div class="page-header">
+          <h1 class="page-title">🏰 Economy, Castle Rush & Farm Management</h1>
+          <div class="page-meta">
+            <div class="meta-tag">📈 <strong>Target:</strong> Fast Castle 1–30+ Progression</div>
+            <div class="meta-tag">🌾 <strong>Focus:</strong> RSS Protection & Farm Account Network</div>
+          </div>
+        </div>
+
+        <div class="alert alert-pro">
+          <div class="alert-icon">📌</div>
+          <div>
+            <strong>PLAYBOOK IN ACTIVE DEVELOPMENT:</strong> Prerequisite building rush charts, warehouse protection formulas, and farm management guides are being added.
+          </div>
+        </div>
+
+        <div class="grid-2">
+          <div class="card">
+            <div class="card-title">⚡ Castle Rush Golden Rules</div>
+            <ul style="margin-left: 20px; color: var(--text-muted); font-size: 0.88rem; display:flex; flex-direction:column; gap:8px;">
+              <li><strong>Follow Prerequisites Only:</strong> Do not level unnecessary side buildings until hitting Castle 25+.</li>
+              <li><strong>Wall & Keep Focus:</strong> Always pre-upgrade Wall and Embassy before starting the main Keep timer.</li>
+              <li><strong>Save Bagged RSS:</strong> Never open bagged resources until immediately initiating a construction upgrade.</li>
+            </ul>
+          </div>
+
+          <div class="card">
+            <div class="card-title">🌾 Farm Account Network</div>
+            <p style="font-size:0.86rem; color:var(--text-muted);">
+              • Maintain 2–3 dedicated farm castles focused 100% on Gathering Talents and Economy Research.<br>
+              • Keep farm castles unguilded or in a dedicated farm alliance outside combat zones.<br>
+              • Harvest farm RSS before major building pushes via low-tax alliance trading or direct plundering.
+            </p>
+          </div>
+        </div>
+      </section>
+
       <!-- ================= TAB 1: CONQUEST OVERVIEW ================= -->
-      <section id="col-overview" class="tab-content active">
+      <section id="col-overview" class="tab-content">
         <div class="page-header">
           <h1 class="page-title">⚔️ Conquest of Lords: Strategic Overview</h1>
           <div class="page-meta">
@@ -1304,17 +1727,26 @@ Leadership of Realm [Y]</div>
   <div id="toast">Copied to Clipboard!</div>
 
   <script>
-    function showTab(tabId) {
+    function showTab(tabId, el) {
       // Hide all tabs
-      document.querySelectorAll('.tab-content').forEach(el => el.classList.remove('active'));
-      document.querySelectorAll('.nav-item').forEach(el => el.classList.remove('active'));
+      document.querySelectorAll('.tab-content').forEach(item => item.classList.remove('active'));
+      document.querySelectorAll('.nav-item').forEach(item => item.classList.remove('active'));
 
       // Show selected tab
       const target = document.getElementById(tabId);
-      if (target) target.classList.add('active');
+      if (target) {
+        target.classList.add('active');
+        // Scroll content area back to top on tab change
+        document.getElementById('main-content').scrollTop = 0;
+      }
 
-      // Set active nav
-      event.currentTarget.classList.add('active');
+      // Highlight active nav item
+      const navMatch = document.querySelector(`.nav-item[onclick*="'${tabId}'"]`);
+      if (navMatch) {
+        navMatch.classList.add('active');
+      } else if (el) {
+        el.classList.add('active');
+      }
     }
 
     function copyToClipboard(elementId) {
@@ -1358,12 +1790,17 @@ Leadership of Realm [Y]</div>
       const query = document.getElementById('quickSearch').value.toLowerCase();
       if (!query) return;
       
-      const tabs = ['col-overview', 'col-mechanics', 'col-trophies', 'col-leagues', 'col-scoring', 'col-diplomacy', 'col-growth', 'col-starter', 'col-outmatched'];
+      const tabs = [
+        'hub-toc', 'hub-glossary',
+        'col-overview', 'col-mechanics', 'col-trophies', 'col-leagues', 
+        'col-scoring', 'col-diplomacy', 'col-growth', 'col-starter', 'col-outmatched',
+        'guide-acelord', 'guide-dragonarena', 'guide-herometa', 'guide-economyrush',
+        'tool-calc', 'tool-discord'
+      ];
       for (const tabId of tabs) {
-        const text = document.getElementById(tabId).innerText.toLowerCase();
-        if (text.includes(query)) {
-          document.querySelectorAll('.tab-content').forEach(el => el.classList.remove('active'));
-          document.getElementById(tabId).classList.add('active');
+        const el = document.getElementById(tabId);
+        if (el && el.innerText.toLowerCase().includes(query)) {
+          showTab(tabId);
           break;
         }
       }
