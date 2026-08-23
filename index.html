@@ -1,0 +1,1373 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Puzzles & Chaos: Frozen Castle — Alliance War Playbook</title>
+  <style>
+    :root {
+      --bg-main: #0b0f19;
+      --bg-card: #131d31;
+      --bg-card-hover: #1c2a47;
+      --bg-sidebar: #0f172a;
+      --border-color: #1e293b;
+      --border-focus: #38bdf8;
+      --text-main: #f1f5f9;
+      --text-muted: #94a3b8;
+      --accent-cyan: #38bdf8;
+      --accent-blue: #0284c7;
+      --accent-gold: #f59e0b;
+      --accent-green: #10b981;
+      --accent-red: #ef4444;
+      --accent-purple: #a855f7;
+      --shadow-glow: 0 0 25px rgba(56, 189, 248, 0.15);
+      --font-stack: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: var(--font-stack);
+      background-color: var(--bg-main);
+      color: var(--text-main);
+      line-height: 1.6;
+      display: flex;
+      height: 100vh;
+      overflow: hidden;
+    }
+
+    /* Scrollbar */
+    ::-webkit-scrollbar {
+      width: 8px;
+      height: 8px;
+    }
+    ::-webkit-scrollbar-track {
+      background: var(--bg-main);
+    }
+    ::-webkit-scrollbar-thumb {
+      background: #334155;
+      border-radius: 4px;
+    }
+    ::-webkit-scrollbar-thumb:hover {
+      background: #475569;
+    }
+
+    /* Sidebar Navigation */
+    #sidebar {
+      width: 290px;
+      min-width: 290px;
+      background-color: var(--bg-sidebar);
+      border-right: 1px solid var(--border-color);
+      display: flex;
+      flex-direction: column;
+      height: 100%;
+      overflow-y: auto;
+      z-index: 20;
+    }
+
+    .brand {
+      padding: 24px 20px;
+      border-bottom: 1px solid var(--border-color);
+      background: linear-gradient(180deg, rgba(56, 189, 248, 0.08) 0%, transparent 100%);
+    }
+
+    .brand-title {
+      font-size: 1.15rem;
+      font-weight: 800;
+      letter-spacing: 0.5px;
+      color: #fff;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .brand-title span {
+      background: linear-gradient(90deg, #38bdf8, #818cf8);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .brand-subtitle {
+      font-size: 0.75rem;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+      margin-top: 4px;
+      font-weight: 600;
+    }
+
+    .nav-group {
+      padding: 16px 12px 6px;
+    }
+
+    .nav-label {
+      font-size: 0.7rem;
+      font-weight: 700;
+      color: #64748b;
+      text-transform: uppercase;
+      letter-spacing: 1.2px;
+      padding: 0 10px 8px;
+    }
+
+    .nav-item {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 10px 14px;
+      border-radius: 8px;
+      color: var(--text-muted);
+      text-decoration: none;
+      font-size: 0.88rem;
+      font-weight: 500;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      margin-bottom: 3px;
+    }
+
+    .nav-item:hover {
+      background-color: var(--bg-card);
+      color: #fff;
+      transform: translateX(3px);
+    }
+
+    .nav-item.active {
+      background: linear-gradient(90deg, rgba(56, 189, 248, 0.18), rgba(56, 189, 248, 0.05));
+      color: var(--accent-cyan);
+      font-weight: 600;
+      border-left: 3px solid var(--accent-cyan);
+    }
+
+    /* Main Container */
+    #main-content {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      height: 100%;
+      overflow-y: auto;
+    }
+
+    /* Top Bar */
+    .topbar {
+      padding: 16px 32px;
+      background-color: rgba(15, 23, 42, 0.85);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border-color);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      position: sticky;
+      top: 0;
+      z-index: 10;
+    }
+
+    .search-box {
+      position: relative;
+      width: 340px;
+    }
+
+    .search-box input {
+      width: 100%;
+      background-color: var(--bg-main);
+      border: 1px solid var(--border-color);
+      border-radius: 20px;
+      padding: 8px 16px 8px 38px;
+      color: #fff;
+      font-size: 0.85rem;
+      outline: none;
+      transition: border-color 0.2s;
+    }
+
+    .search-box input:focus {
+      border-color: var(--accent-cyan);
+      box-shadow: 0 0 10px rgba(56, 189, 248, 0.2);
+    }
+
+    .search-box svg {
+      position: absolute;
+      left: 12px;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 16px;
+      height: 16px;
+      fill: var(--text-muted);
+    }
+
+    .top-badges {
+      display: flex;
+      gap: 12px;
+      align-items: center;
+    }
+
+    .status-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: rgba(16, 185, 129, 0.12);
+      border: 1px solid rgba(16, 185, 129, 0.3);
+      color: #34d399;
+      padding: 4px 12px;
+      border-radius: 20px;
+      font-size: 0.75rem;
+      font-weight: 600;
+    }
+
+    .status-dot {
+      width: 7px;
+      height: 7px;
+      background-color: #34d399;
+      border-radius: 50%;
+      box-shadow: 0 0 8px #34d399;
+    }
+
+    /* Content Area */
+    .content-area {
+      padding: 32px;
+      max-width: 1200px;
+      margin: 0 auto;
+      width: 100%;
+    }
+
+    .page-header {
+      margin-bottom: 28px;
+    }
+
+    .page-title {
+      font-size: 1.85rem;
+      font-weight: 800;
+      color: #fff;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      letter-spacing: -0.5px;
+    }
+
+    .page-meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 16px;
+      margin-top: 12px;
+      color: var(--text-muted);
+      font-size: 0.85rem;
+    }
+
+    .meta-tag {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      background-color: var(--bg-card);
+      border: 1px solid var(--border-color);
+      padding: 4px 12px;
+      border-radius: 6px;
+    }
+
+    .meta-tag strong {
+      color: var(--text-main);
+    }
+
+    /* Grid & Cards */
+    .grid-2 {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(360px, 1fr));
+      gap: 20px;
+      margin-bottom: 24px;
+    }
+
+    .grid-3 {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 18px;
+      margin-bottom: 24px;
+    }
+
+    .card {
+      background-color: var(--bg-card);
+      border: 1px solid var(--border-color);
+      border-radius: 12px;
+      padding: 22px;
+      transition: all 0.25s ease;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.25);
+    }
+
+    .card:hover {
+      border-color: rgba(56, 189, 248, 0.4);
+      transform: translateY(-2px);
+    }
+
+    .card-title {
+      font-size: 1.05rem;
+      font-weight: 700;
+      color: #fff;
+      margin-bottom: 12px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .card-title span.badge {
+      font-size: 0.7rem;
+      padding: 2px 8px;
+      border-radius: 4px;
+      font-weight: 600;
+    }
+
+    .badge-cyan { background: rgba(56, 189, 248, 0.15); color: var(--accent-cyan); border: 1px solid rgba(56, 189, 248, 0.3); }
+    .badge-gold { background: rgba(245, 158, 11, 0.15); color: var(--accent-gold); border: 1px solid rgba(245, 158, 11, 0.3); }
+    .badge-red { background: rgba(239, 68, 68, 0.15); color: var(--accent-red); border: 1px solid rgba(239, 68, 68, 0.3); }
+    .badge-green { background: rgba(16, 185, 129, 0.15); color: var(--accent-green); border: 1px solid rgba(16, 185, 129, 0.3); }
+
+    /* Custom Tables */
+    .table-container {
+      overflow-x: auto;
+      margin: 16px 0;
+      border: 1px solid var(--border-color);
+      border-radius: 10px;
+      background-color: var(--bg-card);
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      text-align: left;
+      font-size: 0.88rem;
+    }
+
+    th {
+      background-color: rgba(15, 23, 42, 0.9);
+      padding: 12px 16px;
+      font-weight: 700;
+      color: #cbd5e1;
+      border-bottom: 1px solid var(--border-color);
+      text-transform: uppercase;
+      font-size: 0.75rem;
+      letter-spacing: 0.8px;
+    }
+
+    td {
+      padding: 12px 16px;
+      border-bottom: 1px solid rgba(30, 41, 59, 0.6);
+      color: var(--text-main);
+    }
+
+    tr:last-child td {
+      border-bottom: none;
+    }
+
+    tr:hover td {
+      background-color: rgba(56, 189, 248, 0.04);
+    }
+
+    /* Callout Alerts */
+    .alert {
+      padding: 16px 20px;
+      border-radius: 10px;
+      margin: 20px 0;
+      display: flex;
+      gap: 14px;
+      align-items: flex-start;
+      font-size: 0.9rem;
+    }
+
+    .alert-pro {
+      background: linear-gradient(90deg, rgba(56, 189, 248, 0.12), rgba(56, 189, 248, 0.03));
+      border-left: 4px solid var(--accent-cyan);
+      border-top: 1px solid rgba(56, 189, 248, 0.2);
+      border-right: 1px solid rgba(56, 189, 248, 0.2);
+      border-bottom: 1px solid rgba(56, 189, 248, 0.2);
+    }
+
+    .alert-warn {
+      background: linear-gradient(90deg, rgba(239, 68, 68, 0.12), rgba(239, 68, 68, 0.03));
+      border-left: 4px solid var(--accent-red);
+      border-top: 1px solid rgba(239, 68, 68, 0.2);
+      border-right: 1px solid rgba(239, 68, 68, 0.2);
+      border-bottom: 1px solid rgba(239, 68, 68, 0.2);
+    }
+
+    .alert-growth {
+      background: linear-gradient(90deg, rgba(16, 185, 129, 0.12), rgba(16, 185, 129, 0.03));
+      border-left: 4px solid var(--accent-green);
+      border-top: 1px solid rgba(16, 185, 129, 0.2);
+      border-right: 1px solid rgba(16, 185, 129, 0.2);
+      border-bottom: 1px solid rgba(16, 185, 129, 0.2);
+    }
+
+    .alert-icon {
+      font-size: 1.3rem;
+      line-height: 1;
+    }
+
+    /* Interactive Calculator Cards */
+    .calc-box {
+      background: linear-gradient(145deg, #131d31, #0f172a);
+      border: 1px solid #223253;
+      border-radius: 12px;
+      padding: 24px;
+      margin-bottom: 24px;
+    }
+
+    .calc-row {
+      display: flex;
+      gap: 16px;
+      flex-wrap: wrap;
+      margin-top: 14px;
+      align-items: center;
+    }
+
+    .calc-input-group {
+      flex: 1;
+      min-width: 180px;
+    }
+
+    .calc-input-group label {
+      display: block;
+      font-size: 0.75rem;
+      font-weight: 700;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      margin-bottom: 6px;
+    }
+
+    .calc-input-group input, .calc-input-group select {
+      width: 100%;
+      background-color: #090d16;
+      border: 1px solid #263554;
+      padding: 10px 14px;
+      border-radius: 8px;
+      color: #fff;
+      font-size: 0.9rem;
+      outline: none;
+    }
+
+    .calc-input-group input:focus, .calc-input-group select:focus {
+      border-color: var(--accent-cyan);
+    }
+
+    .calc-result {
+      background-color: #090d16;
+      border: 1px solid var(--accent-cyan);
+      border-radius: 10px;
+      padding: 14px 20px;
+      min-width: 220px;
+      text-align: center;
+    }
+
+    .calc-result-title {
+      font-size: 0.7rem;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      color: var(--text-muted);
+    }
+
+    .calc-result-value {
+      font-size: 1.4rem;
+      font-weight: 800;
+      color: var(--accent-cyan);
+      margin-top: 2px;
+    }
+
+    /* Copy Box */
+    .code-box {
+      position: relative;
+      background-color: #090d16;
+      border: 1px solid #1e293b;
+      border-radius: 10px;
+      padding: 18px;
+      font-family: 'Consolas', 'Courier New', monospace;
+      font-size: 0.85rem;
+      color: #e2e8f0;
+      white-space: pre-wrap;
+      word-break: break-word;
+      margin: 14px 0;
+    }
+
+    .copy-btn {
+      position: absolute;
+      top: 12px;
+      right: 12px;
+      background-color: #1e293b;
+      color: #94a3b8;
+      border: 1px solid #334155;
+      padding: 6px 12px;
+      border-radius: 6px;
+      font-size: 0.75rem;
+      font-weight: 600;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      transition: all 0.2s;
+    }
+
+    .copy-btn:hover {
+      background-color: var(--accent-blue);
+      color: #fff;
+      border-color: var(--accent-cyan);
+    }
+
+    /* Toast Notification */
+    #toast {
+      position: fixed;
+      bottom: 24px;
+      right: 24px;
+      background-color: var(--accent-green);
+      color: #000;
+      padding: 10px 20px;
+      border-radius: 8px;
+      font-weight: 700;
+      font-size: 0.85rem;
+      display: none;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.4);
+      z-index: 100;
+      animation: fadeIn 0.2s ease;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* Sections tab control */
+    .tab-content {
+      display: none;
+    }
+    .tab-content.active {
+      display: block;
+    }
+
+    /* Step flow */
+    .flow-steps {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 14px;
+      margin: 18px 0;
+    }
+
+    .flow-step {
+      background-color: #0c1220;
+      border: 1px solid #1e293b;
+      border-radius: 8px;
+      padding: 16px;
+      position: relative;
+    }
+
+    .flow-step-num {
+      position: absolute;
+      top: -10px;
+      left: 14px;
+      background-color: var(--accent-blue);
+      color: #fff;
+      font-size: 0.68rem;
+      font-weight: 800;
+      padding: 2px 8px;
+      border-radius: 10px;
+    }
+
+    .flow-step-title {
+      font-size: 0.9rem;
+      font-weight: 700;
+      color: #fff;
+      margin-top: 4px;
+      margin-bottom: 6px;
+    }
+
+    .flow-step-desc {
+      font-size: 0.8rem;
+      color: var(--text-muted);
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Left Sidebar -->
+  <aside id="sidebar">
+    <div class="brand">
+      <div class="brand-title">
+        <span>⚔️ P&C WAR ROOM</span>
+      </div>
+      <div class="brand-subtitle">Frozen Castle Master Playbook</div>
+    </div>
+
+    <div class="nav-group">
+      <div class="nav-label">Cross-Realm Warfare</div>
+      <div class="nav-item active" onclick="showTab('col-overview')">
+        <span>🏛️</span> Conquest of Lords (SvS)
+      </div>
+      <div class="nav-item" onclick="showTab('col-mechanics')">
+        <span>🎯</span> Spires & 10m Cannons
+      </div>
+      <div class="nav-item" onclick="showTab('col-trophies')">
+        <span>🏆</span> Trophy Grade System
+      </div>
+      <div class="nav-item" onclick="showTab('col-leagues')">
+        <span>🏟️</span> League Divisions & 9-Realm
+      </div>
+      <div class="nav-item" onclick="showTab('col-scoring')">
+        <span>🎖️</span> 12K Points & T1 Farming
+      </div>
+      <div class="nav-item" onclick="showTab('col-diplomacy')">
+        <span>🤝</span> NAP & Realm Coalition
+      </div>
+      <div class="nav-item" onclick="showTab('col-growth')">
+        <span>📈</span> Sanctuary & War Relief Loop
+      </div>
+      <div class="nav-item" onclick="showTab('col-starter')">
+        <span>🔰</span> New Alliance Blueprint
+      </div>
+      <div class="nav-item" onclick="showTab('col-outmatched')">
+        <span>🥊</span> Outmatched vs Whales
+      </div>
+    </div>
+
+    <div class="nav-group">
+      <div class="nav-label">Interactive Tools</div>
+      <div class="nav-item" onclick="showTab('tool-calc')">
+        <span>🧮</span> SvS Points & Spire Sim
+      </div>
+      <div class="nav-item" onclick="showTab('tool-discord')">
+        <span>📋</span> Discord Copy Tools
+      </div>
+    </div>
+  </aside>
+
+  <!-- Main Content Area -->
+  <main id="main-content">
+    
+    <!-- Top Navigation Bar -->
+    <header class="topbar">
+      <div class="search-box">
+        <svg viewBox="0 0 24 24"><path d="M15.5 14h-.79l-.28-.27C15.41 12.59 16 11.11 16 9.5 16 5.91 13.09 3 9.5 3S3 5.91 3 9.5 5.91 16 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"/></svg>
+        <input type="text" id="quickSearch" placeholder="Search playbook rules, terms, tactics..." oninput="handleSearch()">
+      </div>
+      <div class="top-badges">
+        <div class="status-badge">
+          <span class="status-dot"></span>
+          <span>Schedule: Sat 10:00 AM UTC (Bi-weekly)</span>
+        </div>
+      </div>
+    </header>
+
+    <div class="content-area">
+
+      <!-- ================= TAB 1: CONQUEST OVERVIEW ================= -->
+      <section id="col-overview" class="tab-content active">
+        <div class="page-header">
+          <h1 class="page-title">⚔️ Conquest of Lords: Strategic Overview</h1>
+          <div class="page-meta">
+            <div class="meta-tag">⏰ <strong>Duration:</strong> 24 Hours (Sat 10:00 UTC - Sun 10:00 UTC)</div>
+            <div class="meta-tag">📅 <strong>Cycle:</strong> Every 2 Weeks</div>
+            <div class="meta-tag">👑 <strong>Grand Prize:</strong> Emperor Crown & Realm Decrees</div>
+          </div>
+        </div>
+
+        <div class="grid-2">
+          <div class="card">
+            <div class="card-title">
+              <span>🏆 Instant Win Condition</span>
+              <span class="badge badge-gold">Dominion Rule</span>
+            </div>
+            <p>Continuously occupy the <strong>Hall of Might (Center)</strong> for <strong>8 consecutive hours</strong> without interruption. If achieved, the war ends immediately and your alliance claims total victory.</p>
+          </div>
+
+          <div class="card">
+            <div class="card-title">
+              <span>⏱️ Endurance Win Condition</span>
+              <span class="badge badge-cyan">24-Hour Timer</span>
+            </div>
+            <p>If no alliance holds the Hall unbroken for 8 hours, victory is awarded to the alliance with the <strong>highest cumulative occupation time</strong> when the 24-hour match timer expires.</p>
+          </div>
+        </div>
+
+        <div class="card" style="margin-bottom: 20px;">
+          <div class="card-title">🌲 The Enchanted Woodland & Cross-Realm Movement Rules</div>
+          <p style="font-size:0.88rem; color:var(--text-muted);">
+            • <strong>Immunity Outside Woodland:</strong> Lords situated <strong>outside the Enchanted Woodland CANNOT be attacked or scouted</strong> by Lords from other Realms!<br>
+            • <strong>Castle Banishment:</strong> If an invader's castle is defeated within the foreign Enchanted Woodland, it is forcibly banished and teleported back to a random coordinate in their original Realm.
+          </p>
+        </div>
+
+        <div class="card" style="margin-bottom: 20px;">
+          <div class="card-title">🛡️ Special War Protection & Multi-Building Garrison Buff</div>
+          <div class="table-container">
+            <table>
+              <thead>
+                <tr>
+                  <th>Mechanic</th>
+                  <th>How It Works</th>
+                  <th>Strategic Impact</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><strong>🛡️ Special War Protection</strong></td>
+                  <td>Opens on your home Hall when your realm occupies a foreign Hall or defeats invaders in your home Hall.</td>
+                  <td><strong>Foreign Lords CANNOT attack or occupy your Hall</strong> while active (only domestic Lords can). <em>Note: Hostile Spires still fire cannons!</em></td>
+                </tr>
+                <tr>
+                  <td><strong>⚡ Multi-Building Garrison Buff</strong></td>
+                  <td>Activates when an alliance occupies a building for <strong>1 continuous hour</strong> (requires $\ge 2$ buildings held for $\ge 20$ min each).</td>
+                  <td>The more buildings held for $>20$ min, the greater the stat buff multiplier.</td>
+                </tr>
+                <tr>
+                  <td><strong>⚔️ Weakened Unit Counters</strong></td>
+                  <td>Troop type counter bonuses (Infantry > Cav > Ranged) are <strong>reduced inside the Hall & Spires</strong>.</td>
+                  <td>Pure raw stats and specialized mono-troop hero synergies dominate over basic rock-paper-scissors counters.</td>
+                </tr>
+                <tr>
+                  <td><strong>💰 Colonization & Taxation</strong></td>
+                  <td>Each additional realm colonized grants an extra set of <strong>Emperor's Award Chests</strong>. Colonized realms pay daily resource taxation.</td>
+                  <td>Taxes flow into the <strong>Realm Treasury</strong>, distributed by the Emperor and Aide.</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+
+      <!-- ================= TAB 2: SPIRES & CANNONS ================= -->
+      <section id="col-mechanics" class="tab-content">
+        <div class="page-header">
+          <h1 class="page-title">🎯 The 4 Spires & 10-Minute Cannon Artillery</h1>
+          <div class="page-meta">
+            <div class="meta-tag">⚡ <strong>Fire Rate:</strong> Every 10 Minutes</div>
+            <div class="meta-tag">💥 <strong>Damage:</strong> 1% Direct Loss per Hostile Spire</div>
+          </div>
+        </div>
+
+        <div class="alert alert-warn">
+          <div class="alert-icon">⚠️</div>
+          <div>
+            <strong>THE SPIRE CANNON RULE:</strong> You cannot hold the Hall of Might if enemy alliances control the Spires. Controlling at least 3 (ideally all 4) Spires is mandatory to stop your garrison from getting wiped by artillery!
+          </div>
+        </div>
+
+        <div class="grid-2">
+          <div class="card">
+            <div class="card-title">💥 Artillery Destruction Rate</div>
+            <div class="table-container">
+              <table>
+                <thead>
+                  <tr>
+                    <th>Hostile Spires</th>
+                    <th>Loss per 10 Min</th>
+                    <th>Loss per 1 Hour</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>1 Enemy Spire</td>
+                    <td>1% Garrison Loss</td>
+                    <td><strong style="color:#38bdf8">6% wiped / hr</strong></td>
+                  </tr>
+                  <tr>
+                    <td>2 Enemy Spires</td>
+                    <td>2% Garrison Loss</td>
+                    <td><strong style="color:#f59e0b">12% wiped / hr</strong></td>
+                  </tr>
+                  <tr>
+                    <td>3 Enemy Spires</td>
+                    <td>3% Garrison Loss</td>
+                    <td><strong style="color:#f97316">18% wiped / hr</strong></td>
+                  </tr>
+                  <tr>
+                    <td>4 Enemy Spires</td>
+                    <td>4% Garrison Loss</td>
+                    <td><strong style="color:#ef4444">24% wiped / hr</strong></td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+          <div class="card">
+            <div class="card-title">🐴 Garrison Rule: Strict Mono-Troop Only</div>
+            <p><strong>Never send "Rainbow" (mixed) or Siege units to the Hall or Spires!</strong></p>
+            <ul style="margin: 12px 0 0 20px; color: var(--text-muted); font-size: 0.88rem;">
+              <li>All garrisoned troops inherit the Rally Leader's specialized hero and stat bonuses.</li>
+              <li>If the Leader is <strong>Cavalry</strong>, send <strong>100% pure Cavalry</strong>.</li>
+              <li>Sending mixed junk/siege dilutes synergy and causes massive unnecessary hospital casualties.</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <!-- ================= TAB 3: TROPHY GRADES ================= -->
+      <section id="col-trophies" class="tab-content">
+        <div class="page-header">
+          <h1 class="page-title">🏆 Realm Trophies & Trophy Grade System</h1>
+          <div class="page-meta">
+            <div class="meta-tag">📍 <strong>Menu:</strong> Event Page ➔ Rank ➔ Realm Trophies</div>
+            <div class="meta-tag">⚖️ <strong>Function:</strong> Cross-Realm ELO & Matchmaking</div>
+          </div>
+        </div>
+
+        <div class="card" style="margin-bottom: 24px;">
+          <div class="card-title">📈 Progression Tiers</div>
+          <div style="display:flex; justify-content:space-between; flex-wrap:wrap; gap:10px; padding: 14px 0; text-align:center;">
+            <div style="flex:1; background:#1e293b; padding:10px; border-radius:8px;">🥉 <strong>Bronze</strong></div>
+            <div style="flex:1; background:#1e293b; padding:10px; border-radius:8px;">🥈 <strong>Silver</strong></div>
+            <div style="flex:1; background:#1e293b; padding:10px; border-radius:8px;">🥇 <strong>Gold</strong></div>
+            <div style="flex:1; background:#1e293b; padding:10px; border-radius:8px; border:1px solid #38bdf8;">💎 <strong>Platinum</strong></div>
+            <div style="flex:1; background:#1e293b; padding:10px; border-radius:8px; border:1px solid #a855f7;">🔮 <strong>Diamond</strong></div>
+            <div style="flex:1; background:#1e293b; padding:10px; border-radius:8px; border:1px solid #f59e0b;">👑 <strong>Master / Legend</strong></div>
+          </div>
+        </div>
+
+        <div class="grid-2">
+          <div class="card">
+            <div class="card-title">🏅 How Trophies are Won / Lost</div>
+            <ul style="margin-left: 20px; color: var(--text-muted); font-size: 0.88rem; display:flex; flex-direction:column; gap:10px;">
+              <li><strong style="color:#10b981">Full Conquest (Defend Home + Win Foreign Hall):</strong> Maximum Trophy gain, rapid rank up.</li>
+              <li><strong style="color:#38bdf8">Defensive Victory (Defend Home Hall):</strong> Moderate Trophy gain / tier maintenance.</li>
+              <li><strong style="color:#ef4444">Invasion Defeat (Home Hall captured by foreign enemies):</strong> Heavy Trophy deduction, risks demotion.</li>
+            </ul>
+          </div>
+
+          <div class="card">
+            <div class="card-title">⚠️ The "Trophy Bracket Trap"</div>
+            <p style="font-size:0.88rem; color:var(--text-muted);">Climbing too quickly into Diamond/Master brackets before your realm has consolidated whale accounts will match your realm against veteran, multi-year spender realms. Leadership must balance trophy gains with realistic realm combat power.</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- ================= TAB: LEAGUE DIVISIONS & 9-REALM TOURNAMENT ================= -->
+      <section id="col-leagues" class="tab-content">
+        <div class="page-header">
+          <h1 class="page-title">🏟️ League Divisions & 9-Realm Tournament System</h1>
+          <div class="page-meta">
+            <div class="meta-tag">⚔️ <strong>Format:</strong> 4-Round Round-Robin (3 Arenas)</div>
+            <div class="meta-tag">🏆 <strong>Reward:</strong> Double Postseason Rewards & Championship Mark</div>
+          </div>
+        </div>
+
+        <div class="grid-3" style="margin-bottom: 20px;">
+          <div class="card">
+            <div class="card-title">🛡️ League 1 Division</div>
+            <p style="font-size:0.85rem; color:var(--text-muted);"><strong>Servers 1 – 36</strong><br>Veteran consolidated realms with maxed Tier 12/13 military power.</p>
+          </div>
+          <div class="card">
+            <div class="card-title">⚔️ League 2 Division</div>
+            <p style="font-size:0.85rem; color:var(--text-muted);"><strong>Servers 37 – 72</strong><br>Mid-generation competitive realms with active whale alliances.</p>
+          </div>
+          <div class="card">
+            <div class="card-title">🏹 League 3 Division</div>
+            <p style="font-size:0.85rem; color:var(--text-muted);"><strong>Servers 73 – 99+</strong><br>Newer realms growing through early-stage consolidation.</p>
+          </div>
+        </div>
+
+        <div class="card" style="margin-bottom: 24px;">
+          <div class="card-title">🔄 4-Round Round-Robin Schedule (9 Realms, 3 Arenas)</div>
+          <div class="table-container">
+            <table>
+              <thead>
+                <tr>
+                  <th>Round</th>
+                  <th>Arena 1 Matchup</th>
+                  <th>Arena 2 Matchup</th>
+                  <th>Arena 3 Matchup</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><strong>Round 1</strong></td>
+                  <td><strong>A — B — C</strong></td>
+                  <td><strong>D — E — F</strong></td>
+                  <td><strong>G — H — I</strong></td>
+                </tr>
+                <tr>
+                  <td><strong>Round 2</strong></td>
+                  <td><strong>A — D — G</strong></td>
+                  <td><strong>B — E — H</strong></td>
+                  <td><strong>C — F — I</strong></td>
+                </tr>
+                <tr>
+                  <td><strong>Round 3</strong></td>
+                  <td><strong>A — E — I</strong></td>
+                  <td><strong>B — F — G</strong></td>
+                  <td><strong>C — D — H</strong></td>
+                </tr>
+                <tr>
+                  <td><strong>Round 4</strong></td>
+                  <td><strong>A — F — H</strong></td>
+                  <td><strong>B — D — I</strong></td>
+                  <td><strong>C — E — G</strong></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <p style="font-size:0.8rem; color:var(--text-muted); margin-top:8px;">*Over 4 rounds, each realm fights all other 8 realms in their group exactly once in simultaneous 3-realm arena battles.*</p>
+        </div>
+
+        <div class="grid-2">
+          <div class="card">
+            <div class="card-title">🎯 Colonization Scoring Matrix</div>
+            <div class="table-container">
+              <table>
+                <thead>
+                  <tr>
+                    <th>Match Outcome</th>
+                    <th>Points</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><strong>Colonize Another Realm (Occupy Foreign Hall)</strong></td>
+                    <td><strong style="color:#10b981">+100 PTS / realm</strong></td>
+                  </tr>
+                  <tr>
+                    <td><strong>Defensive Hold (Not colonized & no conquest)</strong></td>
+                    <td><strong style="color:#38bdf8">+25 PTS</strong></td>
+                  </tr>
+                  <tr>
+                    <td><strong>Colonized (Lost Home Hall to Invaders)</strong></td>
+                    <td><strong style="color:#ef4444">0 PTS</strong></td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+          <div class="card">
+            <div class="card-title">⚖️ Official Tie-Breaker Priority</div>
+            <ol style="margin-left: 20px; color: var(--text-muted); font-size: 0.88rem; display:flex; flex-direction:column; gap:8px;">
+              <li><strong>1. Total Colonization Points</strong></li>
+              <li><strong>2. Total Number of Colonized Realms</strong> (Most wins)</li>
+              <li><strong>3. Fewest Times Being Colonized</strong> (Least losses)</li>
+              <li><strong>4. Total Individual Realm Points</strong> (Sum of all player points in realm across the entire cycle)</li>
+            </ol>
+          </div>
+        </div>
+      </section>
+
+      <!-- ================= TAB 4: 12K SCORING & T1 META ================= -->
+      <section id="col-scoring" class="tab-content">
+        <div class="page-header">
+          <h1 class="page-title">🎖️ 12,000 Personal Points & The T1 Sacrifice Meta</h1>
+          <div class="page-meta">
+            <div class="meta-tag">🎯 <strong>Milestone Target:</strong> 12,000 Points</div>
+            <div class="meta-tag">💡 <strong>Secret Rule:</strong> T1 Losses = FULL Points | T1 Kills = 0 Points</div>
+          </div>
+        </div>
+
+        <div class="alert alert-pro">
+          <div class="alert-icon">💡</div>
+          <div>
+            <strong>THE T1 EXPLOIT:</strong> Killing enemy T1 troops gives <strong>0 points</strong>, but <strong>losing your own T1 troops grants full loss points!</strong> F2P and budget players can send disposable T1 marches to hit their 12k milestone instantly at zero real cost.
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-title">📊 Point Architecture</div>
+          <div class="table-container">
+            <table>
+              <thead>
+                <tr>
+                  <th>Action</th>
+                  <th>Point Reward</th>
+                  <th>Notes & Best Practice</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><strong>🏛️ Hall Occupation</strong></td>
+                  <td><strong>2,000 Points per 2 Hours</strong></td>
+                  <td>Awarded to occupying alliance members.</td>
+                </tr>
+                <tr>
+                  <td><strong>🎯 Spire Occupation</strong></td>
+                  <td><strong>2,000 Points per 4 Hours</strong></td>
+                  <td>Great safe point source for secondary/newer alliances.</td>
+                </tr>
+                <tr>
+                  <td><strong>⚔️ Enemy Kills (T2-T12+)</strong></td>
+                  <td>Scales by tier killed</td>
+                  <td><strong>T1 kills give 0 points.</strong> Do not hunt T1s.</td>
+                </tr>
+                <tr>
+                  <td><strong>🩸 Troop Losses</strong></td>
+                  <td>Points for wounded/dead units</td>
+                  <td><strong>T1 units COUNT!</strong> Train thousands of cheap T1s for easy point sacrifices.</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+
+      <!-- ================= TAB 5: DIPLOMACY & COALITION ================= -->
+      <section id="col-diplomacy" class="tab-content">
+        <div class="page-header">
+          <h1 class="page-title">🤝 Cross-Realm NAP & Domestic Coalition</h1>
+          <div class="page-meta">
+            <div class="meta-tag">🕊️ <strong>Cross-Realm NAP:</strong> Hall-Only Warfare Agreement</div>
+            <div class="meta-tag">🛡️ <strong>Home Coalition:</strong> Top 3-5 Alliance Unity</div>
+          </div>
+        </div>
+
+        <div class="grid-2">
+          <div class="card">
+            <div class="card-title">📜 Standard Cross-Realm NAP Terms</div>
+            <ul style="margin-left: 20px; color: var(--text-muted); font-size: 0.88rem; display:flex; flex-direction:column; gap:8px;">
+              <li><strong>1. Hall & Spires Only:</strong> Combat strictly confined to the central objective zone.</li>
+              <li><strong>2. No Tile-Hitting:</strong> Absolute prohibition on hitting resource nodes.</li>
+              <li><strong>3. No Farm Burning:</strong> Ban on raiding unshielded castles outside the combat objectives.</li>
+              <li><strong>4. Rogue Enforcement:</strong> Home realm leadership zeroes and compensates any rogue player who violates NAP.</li>
+            </ul>
+          </div>
+
+          <div class="card">
+            <div class="card-title">🏛️ Domestic Realm War Council Grid</div>
+            <ul style="margin-left: 20px; color: var(--text-muted); font-size: 0.88rem; display:flex; flex-direction:column; gap:8px;">
+              <li><strong>Emperor Crown Rotation:</strong> Top alliances agree to alternate winning the Emperor title across successive SvS wars.</li>
+              <li><strong>Spire Distribution:</strong>
+                <br>• <em>Alliance A (Main Whale):</em> Hall of Might + North Spire
+                <br>• <em>Alliance B:</em> East & West Spires
+                <br>• <em>Alliance C / New Alliances:</em> South Spire + Anti-Raid Defense Grid
+              </li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <!-- ================= TAB 6: SANCTUARY & WAR RELIEF LOOP ================= -->
+      <section id="col-growth" class="tab-content">
+        <div class="page-header">
+          <h1 class="page-title">📈 Casualty Control & Post-War Relief Growth Loop</h1>
+          <div class="page-meta">
+            <div class="meta-tag">🏥 <strong>Sanctuary Capacity:</strong> = 100% Medical Tent Capacity</div>
+            <div class="meta-tag">🚀 <strong>Post-War Relief:</strong> +300% Training Speed (120% Losses)</div>
+          </div>
+        </div>
+
+        <div class="alert alert-growth">
+          <div class="alert-icon">🌱</div>
+          <div>
+            <strong>THE NET-POSITIVE ARMY LOOP:</strong> Pre-filling medical tents with cheap T1s forces elite T10-T12 casualties into the Sanctuary (revived 100% free with Holy Light over 14 days). You then promote or train troops with the +300% War Relief buff—exiting the war with <strong>more troops than you started with!</strong>
+          </div>
+        </div>
+
+        <div class="flow-steps">
+          <div class="flow-step">
+            <div class="flow-step-num">STEP 1</div>
+            <div class="flow-step-title">T1 Pre-Fill</div>
+            <div class="flow-step-desc">Fill 100% of Medical Tents with disposable T1s before combat starts.</div>
+          </div>
+          <div class="flow-step">
+            <div class="flow-step-num">STEP 2</div>
+            <div class="flow-step-title">Sanctuary Bypass</div>
+            <div class="flow-step-desc">High-tier wounded in SvS bypass full hospital and enter Sanctuary safely.</div>
+          </div>
+          <div class="flow-step">
+            <div class="flow-step-num">STEP 3</div>
+            <div class="flow-step-title">Holy Light Focus</div>
+            <div class="flow-step-desc">Revive 100% of Sanctuary troops for FREE using Holy Light over the 2-week cycle.</div>
+          </div>
+          <div class="flow-step">
+            <div class="flow-step-num">STEP 4</div>
+            <div class="flow-step-title">War Relief Buff</div>
+            <div class="flow-step-desc">Promote healed T1s to T10-T12 at +300% speed (up to 120% losses covered!).</div>
+          </div>
+        </div>
+
+        <div class="card" style="margin-top:20px;">
+          <div class="card-title">⚖️ Post-War Strategy: Option A vs Option B</div>
+          <div class="table-container">
+            <table>
+              <thead>
+                <tr>
+                  <th>Strategy</th>
+                  <th>Action</th>
+                  <th>Advantages</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><strong>Option A: T1 Promotion</strong></td>
+                  <td>Heal T1s in tents, then <strong>promote T1s to T10-T12</strong> at +300% speed. Revive Sanctuary units via Holy Light.</td>
+                  <td><strong>Lowest speed-up & RSS cost:</strong> Promoting is vastly cheaper and faster than raw training.</td>
+                </tr>
+                <tr>
+                  <td><strong>Option B: Permanent Plug</strong></td>
+                  <td><strong>Do NOT heal T1s</strong> (leave them parked in tents). Train brand new T10-T12s at +300% speed.</td>
+                  <td><strong>24/7 Zero-Maintenance:</strong> Tents stay permanently pre-loaded for future wars and surprise raids.</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <div class="card" style="margin-top:20px;">
+          <div class="card-title">⚡ The Instant Batch Healing Technique</div>
+          <p style="font-size:0.88rem; color:var(--text-muted);">Never press "Heal All" during combat! Heal wounded in small batches of <strong>15–30 minutes</strong>. With 15–30 active alliance helps, each batch clears <strong>instantly (0 seconds)</strong> without spending any speed-ups or diamonds.</p>
+        </div>
+      </section>
+
+      <!-- ================= TAB 7: NEW ALLIANCE BLUEPRINT ================= -->
+      <section id="col-starter" class="tab-content">
+        <div class="page-header">
+          <h1 class="page-title">🔰 New Alliance Survival & Success Blueprint</h1>
+          <div class="page-meta">
+            <div class="meta-tag">🛡️ <strong>Focus:</strong> Defense, Spire Holding & Point Maximization</div>
+          </div>
+        </div>
+
+        <div class="grid-2">
+          <div class="card">
+            <div class="card-title">1️⃣ 100% Shield Compliance</div>
+            <p style="font-size:0.88rem; color:var(--text-muted);">Foreign jumpers hunt young alliance hives to farm easy kills and loot. Mandate 24-hour peace shields for every member not actively garrisoned on the battlefield.</p>
+          </div>
+
+          <div class="card">
+            <div class="card-title">2️⃣ Target One Single Spire</div>
+            <p style="font-size:0.88rem; color:var(--text-muted);">Do not attempt to solo the Hall of Might against whale alliances. Claim and defend <strong>one assigned Spire</strong>—holding it for 4 hours grants <strong>2,000 occupation points</strong> safely.</p>
+          </div>
+
+          <div class="card">
+            <div class="card-title">3️⃣ Teach T1 Point Farming</div>
+            <p style="font-size:0.88rem; color:var(--text-muted);">Ensure all new members understand that T1 losses give full points. Run controlled T1 sacrifice runs so everyone claims all 12k milestone tier rewards.</p>
+          </div>
+
+          <div class="card">
+            <div class="card-title">4️⃣ Use Instant Batch Healing</div>
+            <p style="font-size:0.88rem; color:var(--text-muted);">Train your members to heal in small 15-minute batches and spam the alliance help button so nobody runs out of healing speed-ups.</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- ================= TAB: OUTMATCHED VS WHALES ================= -->
+      <section id="col-outmatched" class="tab-content">
+        <div class="page-header">
+          <h1 class="page-title">🥊 Asymmetrical Warfare: When Heavily Outmatched</h1>
+          <div class="page-meta">
+            <div class="meta-tag">⚔️ <strong>Focus:</strong> Underdog Tactics, Spire Bleed & Point Denial</div>
+          </div>
+        </div>
+
+        <div class="alert alert-warn">
+          <div class="alert-icon">🥊</div>
+          <div>
+            <strong>THE UNDERDOG RULE:</strong> When facing a mega-whale realm, never fight head-on at the Hall of Might. Shift 100% to <strong>Asymmetrical Guerrilla Warfare</strong> to bleed their army via artillery, deny them kill points, and maximize your alliance rewards.
+          </div>
+        </div>
+
+        <div class="grid-2">
+          <div class="card">
+            <div class="card-title">
+              <span>🎯 1. The "Spire Bleed" Tactic</span>
+              <span class="badge badge-red">24% Loss / Hr</span>
+            </div>
+            <p style="font-size:0.88rem; color:var(--text-muted);">Do not suicide rallies into the whale's Hall of Might. Split into 4 mobile squads to capture and rotate the 4 outer Spires. Controlling 3–4 Spires deals <strong>18% to 24% automatic troop loss per hour</strong> directly to the whale's Hall garrison with <strong>zero combat casualties</strong> on your side!</p>
+          </div>
+
+          <div class="card">
+            <div class="card-title">
+              <span>👻 2. The T-3s Ghost Recall Trick</span>
+              <span class="badge badge-cyan">Anti-Rally Exploit</span>
+            </div>
+            <p style="font-size:0.88rem; color:var(--text-muted);">When an enemy whale rallies your Spire, hold it until <strong>T-minus 3 seconds</strong> before impact, then <strong>recall all troops at once</strong>. The whale hits an empty building—wasting 5 minutes of rally time and march speeds for 0 kills! Immediately re-occupy with fast cavalry 5s later.</p>
+          </div>
+
+          <div class="card">
+            <div class="card-title">
+              <span>🛡️ 3. 100% Point & Kill Denial</span>
+              <span class="badge badge-gold">Starve the Whales</span>
+            </div>
+            <p style="font-size:0.88rem; color:var(--text-muted);">Whales play SvS for leaderboard kill points. Keep your entire home realm under 24-hour peace shields, and only use <strong>pure T1 armies</strong> on the battlefield. Killing T1s gives the attacker <strong>0 kill points</strong>, starving them of rank points while giving you full 12k milestone loss points.</p>
+          </div>
+
+          <div class="card">
+            <div class="card-title">
+              <span>🕊️ 4. The "Spire-Share" Damage Control NAP</span>
+              <span class="badge badge-green">Diplomatic Win</span>
+            </div>
+            <p style="font-size:0.88rem; color:var(--text-muted);">If outmatched, negotiate with foreign leadership to concede the Hall/Emperor title uncontested in exchange for <strong>guaranteed ownership of 2 Spires</strong> and a strict <strong>no-raid agreement</strong>. Whales get an easy Emperor crown, and your alliance safely gets all 12k points and 2,000 occupation points!</p>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-title">🏹 5. Cross-Realm Farm Hunting (Hit & Run)</div>
+          <p style="font-size:0.88rem; color:var(--text-muted);">While the enemy realm's top spenders are occupied defending the Hall of Might, dispatch 2–3 fast solo raiders to the <strong>enemy realm's outer territory</strong>. Scan for lazy unshielded farm castles, plunder hundreds of millions in RSS, and port back before their defense squads notice.</p>
+        </div>
+      </section>
+
+      <!-- ================= TAB 8: CALCULATORS & SIMULATORS ================= -->
+      <section id="tool-calc" class="tab-content">
+        <div class="page-header">
+          <h1 class="page-title">🧮 Interactive SvS Calculators & Simulators</h1>
+          <div class="page-meta">
+            <div class="meta-tag">⚡ Live Battle Math</div>
+          </div>
+        </div>
+
+        <!-- Calculator 1: Spire Cannon Loss Simulator -->
+        <div class="calc-box">
+          <div class="card-title">💥 Spire Artillery Damage Simulator</div>
+          <p style="font-size:0.85rem; color:var(--text-muted);">Calculate total troop loss inside the Hall of Might based on enemy-held Spires.</p>
+          <div class="calc-row">
+            <div class="calc-input-group">
+              <label>Hostile Spires Held</label>
+              <select id="simSpires" onchange="calcSpireDamage()">
+                <option value="1">1 Enemy Spire (1% / 10 min)</option>
+                <option value="2">2 Enemy Spires (2% / 10 min)</option>
+                <option value="3">3 Enemy Spires (3% / 10 min)</option>
+                <option value="4" selected>4 Enemy Spires (4% / 10 min)</option>
+              </select>
+            </div>
+            <div class="calc-input-group">
+              <label>Occupation Time (Hours)</label>
+              <input type="number" id="simHours" value="2" min="0.5" max="24" step="0.5" oninput="calcSpireDamage()">
+            </div>
+            <div class="calc-result">
+              <div class="calc-result-title">Total Garrison Loss</div>
+              <div class="calc-result-value" id="simResultLoss">48.0%</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Calculator 2: Occupation Point Calculator -->
+        <div class="calc-box">
+          <div class="card-title">⏱️ Occupation Points Calculator</div>
+          <p style="font-size:0.85rem; color:var(--text-muted);">Calculate points earned from holding the Hall of Might or Spires.</p>
+          <div class="calc-row">
+            <div class="calc-input-group">
+              <label>Structure Held</label>
+              <select id="occStructure" onchange="calcOccPoints()">
+                <option value="hall">Hall of Might (2,000 pts / 2 hrs)</option>
+                <option value="spire">Spire (2,000 pts / 4 hrs)</option>
+              </select>
+            </div>
+            <div class="calc-input-group">
+              <label>Hold Duration (Hours)</label>
+              <input type="number" id="occHours" value="4" min="0.5" max="24" step="0.5" oninput="calcOccPoints()">
+            </div>
+            <div class="calc-result">
+              <div class="calc-result-title">Occupation Points</div>
+              <div class="calc-result-value" id="occResultPts">4,000 PTS</div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ================= TAB 9: DISCORD COPY TOOLS ================= -->
+      <section id="tool-discord" class="tab-content">
+        <div class="page-header">
+          <h1 class="page-title">📋 1-Click Discord & Alliance Mail Templates</h1>
+          <div class="page-meta">
+            <div class="meta-tag">🚀 Ready-to-use Announcements</div>
+          </div>
+        </div>
+
+        <div class="card" style="margin-bottom: 24px;">
+          <div class="card-title">📢 Conquest of Lords: Discord Pre-War Announcement</div>
+          <div class="code-box" id="templateDiscord">⚔️ ================= CONQUEST OF LORDS OPERATIONAL RULES ================= ⚔️
+⏰ TIME: Saturday 10:00 AM UTC (Duration: 24 Hours)
+🎯 OBJECTIVE: Hall of Might (8h continuous or max cumulative time)
+
+🏆 1. TROPHY GRADE: Defending home + taking foreign Hall maximizes Trophy gains.
+🛡️ 2. SHIELD MANDATE: All non-combatants MUST bubble 24h before 10:00 UTC.
+🎯 3. SPIRE RULE: Spires fire EVERY 10 MINS (1% Hall loss per spire). Spires MUST stay 100% held!
+🐴 4. MONO-TROOP ONLY: Check Rally Lead's troop type. NO MIXED/RAINBOW, NO SIEGE.
+🎖️ 5. 12K POINTS: Hit 12k points via Occupation (2h Hall / 4h Spire) + T1 loss runs (T1 kills = 0 pts; T1 losses = FULL pts).
+🏥 6. T1 PRE-FILL: Pre-fill Medical Tents with T1s so T10-T12 deaths go to Sanctuary (Revived 100% FREE via Holy Light)!
+⚡ 7. INSTANT HEAL: Heal wounded in small 15-30 min batches for INSTANT free alliance-help clears.
+📈 8. WAR RELIEF (300%): Promote healed T1s to T10-T12 under the 300% buff (covers up to 120% losses). Net Army Growth!
+🤝 9. ALLIANCE COALITION: North Spire=[Alli A], East=[Alli B], West=[Alli C], South=[Alli D].
+==========================================================================</div>
+          <button class="copy-btn" onclick="copyToClipboard('templateDiscord')">📋 Copy Discord Post</button>
+        </div>
+
+        <div class="card">
+          <div class="card-title">🕊️ Cross-Realm NAP Negotiation Letter (In-Game Mail)</div>
+          <div class="code-box" id="templateNAP">Greetings Realm [X] Leadership,
+
+Ahead of our upcoming Conquest of Lords war on Saturday at 10:00 AM UTC, Realm [Y] proposes a standard Cross-Realm NAP with the following terms:
+1. Combat is strictly restricted to the Hall of Might and 4 Spires.
+2. Absolute ban on attacking resource gathering tiles across both realms.
+3. No raiding or burning unshielded castles outside the central objective zone.
+4. Any rogue players violating this agreement will be zeroed by their home leadership and resources reimbursed.
+
+Let us test our military strength honorably at the Hall without damaging our realms' underlying economies. Please confirm agreement.
+
+Signed,
+Leadership of Realm [Y]</div>
+          <button class="copy-btn" onclick="copyToClipboard('templateNAP')">📋 Copy NAP Letter</button>
+        </div>
+      </section>
+
+    </div>
+  </main>
+
+  <!-- Toast Notification -->
+  <div id="toast">Copied to Clipboard!</div>
+
+  <script>
+    function showTab(tabId) {
+      // Hide all tabs
+      document.querySelectorAll('.tab-content').forEach(el => el.classList.remove('active'));
+      document.querySelectorAll('.nav-item').forEach(el => el.classList.remove('active'));
+
+      // Show selected tab
+      const target = document.getElementById(tabId);
+      if (target) target.classList.add('active');
+
+      // Set active nav
+      event.currentTarget.classList.add('active');
+    }
+
+    function copyToClipboard(elementId) {
+      const text = document.getElementById(elementId).innerText;
+      navigator.clipboard.writeText(text).then(() => {
+        showToast('Copied to clipboard!');
+      });
+    }
+
+    function showToast(msg) {
+      const toast = document.getElementById('toast');
+      toast.innerText = msg;
+      toast.style.display = 'block';
+      setTimeout(() => {
+        toast.style.display = 'none';
+      }, 2500);
+    }
+
+    function calcSpireDamage() {
+      const spires = parseInt(document.getElementById('simSpires').value);
+      const hours = parseFloat(document.getElementById('simHours').value) || 0;
+      // Each spire fires every 10 min = 6 times per hour at 1% each = 6% per spire per hour
+      const totalShots = (hours * 60) / 10;
+      const totalLoss = Math.min(100, (spires * 1 * totalShots)).toFixed(1);
+      document.getElementById('simResultLoss').innerText = totalLoss + '%';
+    }
+
+    function calcOccPoints() {
+      const type = document.getElementById('occStructure').value;
+      const hours = parseFloat(document.getElementById('occHours').value) || 0;
+      let points = 0;
+      if (type === 'hall') {
+        points = Math.floor((hours / 2) * 2000);
+      } else {
+        points = Math.floor((hours / 4) * 2000);
+      }
+      document.getElementById('occResultPts').innerText = points.toLocaleString() + ' PTS';
+    }
+
+    function handleSearch() {
+      const query = document.getElementById('quickSearch').value.toLowerCase();
+      if (!query) return;
+      
+      const tabs = ['col-overview', 'col-mechanics', 'col-trophies', 'col-leagues', 'col-scoring', 'col-diplomacy', 'col-growth', 'col-starter', 'col-outmatched'];
+      for (const tabId of tabs) {
+        const text = document.getElementById(tabId).innerText.toLowerCase();
+        if (text.includes(query)) {
+          document.querySelectorAll('.tab-content').forEach(el => el.classList.remove('active'));
+          document.getElementById(tabId).classList.add('active');
+          break;
+        }
+      }
+    }
+  </script>
+</body>
+</html>
