@@ -1,0 +1,1230 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Puzzles & Chaos - Troop & Quest Calculator</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700;900&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg-main: #0c0f17;
+      --bg-card: #141926;
+      --bg-card-alt: #1a2234;
+      --bg-input: #0e131f;
+      --border-color: #2a354c;
+      --border-focus: #f59e0b;
+      --gold-main: #fbbf24;
+      --gold-glow: rgba(251, 191, 36, 0.35);
+      --text-main: #f3f4f6;
+      --text-muted: #94a3b8;
+      --accent-blue: #38bdf8;
+      --accent-green: #34d399;
+      --accent-purple: #c084fc;
+      --accent-red: #f87171;
+      --radius: 12px;
+      --transition: all 0.2s ease-in-out;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      background-color: var(--bg-main);
+      color: var(--text-main);
+      font-family: 'Inter', system-ui, -apple-system, sans-serif;
+      min-height: 100vh;
+      padding: 24px 16px 60px;
+      line-height: 1.5;
+      background-image: 
+        radial-gradient(ellipse at 50% 0%, rgba(245, 158, 11, 0.08) 0%, transparent 70%),
+        radial-gradient(ellipse at 80% 80%, rgba(56, 189, 248, 0.04) 0%, transparent 60%);
+    }
+
+    .container {
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+
+    header {
+      text-align: center;
+      margin-bottom: 28px;
+    }
+
+    .title-badge {
+      display: inline-block;
+      font-size: 0.8rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      font-weight: 700;
+      color: var(--gold-main);
+      background: rgba(251, 191, 36, 0.1);
+      border: 1px solid rgba(251, 191, 36, 0.3);
+      padding: 4px 14px;
+      border-radius: 9999px;
+      margin-bottom: 8px;
+    }
+
+    h1 {
+      font-family: 'Cinzel', serif;
+      font-size: 2.2rem;
+      font-weight: 800;
+      background: linear-gradient(135deg, #fff 40%, var(--gold-main) 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      margin-bottom: 6px;
+      text-shadow: 0 4px 12px rgba(0,0,0,0.5);
+    }
+
+    .subtitle {
+      color: var(--text-muted);
+      font-size: 0.95rem;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 20px;
+    }
+
+    @media (min-width: 900px) {
+      .grid {
+        grid-template-columns: 1.15fr 0.85fr;
+      }
+    }
+
+    .card {
+      background: var(--bg-card);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius);
+      padding: 22px;
+      box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.5);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 3px;
+      background: linear-gradient(90deg, transparent, var(--border-color), transparent);
+    }
+
+    .card.primary-accent::before {
+      background: linear-gradient(90deg, transparent, var(--gold-main), transparent);
+    }
+
+    .card.quest-army::before {
+      background: linear-gradient(90deg, transparent, var(--accent-red), transparent);
+    }
+
+    .card.quest-arms::before {
+      background: linear-gradient(90deg, transparent, var(--accent-blue), transparent);
+    }
+
+    .card-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 18px;
+      padding-bottom: 12px;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+    }
+
+    .card-title {
+      font-family: 'Cinzel', serif;
+      font-size: 1.25rem;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .card-title .icon {
+      font-size: 1.3rem;
+    }
+
+    .toggle-wrap {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 0.85rem;
+      font-weight: 600;
+      color: var(--text-muted);
+      cursor: pointer;
+    }
+
+    .switch {
+      position: relative;
+      display: inline-block;
+      width: 44px;
+      height: 24px;
+    }
+
+    .switch input {
+      opacity: 0;
+      width: 0;
+      height: 0;
+    }
+
+    .slider {
+      position: absolute;
+      cursor: pointer;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background-color: var(--bg-input);
+      border: 1px solid var(--border-color);
+      transition: .3s;
+      border-radius: 24px;
+    }
+
+    .slider:before {
+      position: absolute;
+      content: "";
+      height: 16px;
+      width: 16px;
+      left: 3px;
+      bottom: 3px;
+      background-color: var(--text-muted);
+      transition: .3s;
+      border-radius: 50%;
+    }
+
+    input:checked + .slider {
+      background-color: var(--gold-main);
+      border-color: var(--gold-main);
+    }
+
+    input:checked + .slider:before {
+      transform: translateX(20px);
+      background-color: #111;
+    }
+
+    .form-group {
+      margin-bottom: 16px;
+    }
+
+    label {
+      display: block;
+      font-size: 0.82rem;
+      font-weight: 600;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      margin-bottom: 6px;
+    }
+
+    .input-wrap {
+      position: relative;
+    }
+
+    input[type="text"], input[type="number"], select {
+      width: 100%;
+      background: var(--bg-input);
+      border: 1px solid var(--border-color);
+      border-radius: 8px;
+      padding: 10px 14px;
+      color: #fff;
+      font-size: 1rem;
+      font-weight: 500;
+      font-family: 'Inter', sans-serif;
+      transition: var(--transition);
+    }
+
+    input:focus, select:focus {
+      outline: none;
+      border-color: var(--gold-main);
+      box-shadow: 0 0 0 3px rgba(251, 191, 36, 0.15);
+    }
+
+    .quick-tags {
+      display: flex;
+      gap: 6px;
+      margin-top: 6px;
+    }
+
+    .tag-btn {
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid var(--border-color);
+      color: var(--text-muted);
+      padding: 2px 8px;
+      border-radius: 6px;
+      font-size: 0.75rem;
+      cursor: pointer;
+      transition: var(--transition);
+    }
+
+    .tag-btn:hover {
+      background: rgba(251, 191, 36, 0.15);
+      color: var(--gold-main);
+      border-color: var(--gold-main);
+    }
+
+    .troops-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 12px;
+      margin-top: 8px;
+    }
+
+    @media (max-width: 500px) {
+      .troops-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .troop-item {
+      background: var(--bg-card-alt);
+      border: 1px solid rgba(255, 255, 255, 0.05);
+      border-radius: 8px;
+      padding: 10px;
+    }
+
+    .troop-label {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 0.8rem;
+      font-weight: 600;
+      color: #cbd5e1;
+      margin-bottom: 6px;
+    }
+
+    .badge-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+    }
+
+    .dot-infantry { background-color: #ef4444; }
+    .dot-cavalry { background-color: #3b82f6; }
+    .dot-archers { background-color: #10b981; }
+    .dot-vehicles { background-color: #f59e0b; }
+
+    /* Results Box */
+    .results-banner {
+      background: linear-gradient(135deg, rgba(251, 191, 36, 0.08), rgba(251, 191, 36, 0.02));
+      border: 1px solid rgba(251, 191, 36, 0.3);
+      border-radius: 10px;
+      padding: 16px;
+      margin-top: 20px;
+    }
+
+    .stat-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 8px 0;
+      border-bottom: 1px dashed rgba(255, 255, 255, 0.07);
+    }
+
+    .stat-row:last-child {
+      border-bottom: none;
+      padding-bottom: 0;
+    }
+
+    .stat-label {
+      font-size: 0.88rem;
+      color: var(--text-muted);
+    }
+
+    .stat-val {
+      font-size: 1.15rem;
+      font-weight: 700;
+      color: #fff;
+    }
+
+    .stat-val.highlight {
+      color: var(--gold-main);
+      font-size: 1.35rem;
+      font-family: 'Cinzel', serif;
+    }
+
+    .stat-val.badge {
+      background: rgba(56, 189, 248, 0.15);
+      color: var(--accent-blue);
+      border: 1px solid rgba(56, 189, 248, 0.3);
+      padding: 3px 10px;
+      border-radius: 20px;
+      font-size: 0.95rem;
+    }
+
+    /* Progress Bar */
+    .progress-wrap {
+      margin: 14px 0 6px;
+    }
+
+    .progress-bar-bg {
+      height: 8px;
+      background: var(--bg-input);
+      border-radius: 6px;
+      overflow: hidden;
+      border: 1px solid var(--border-color);
+    }
+
+    .progress-fill {
+      height: 100%;
+      background: linear-gradient(90deg, #3b82f6, var(--gold-main));
+      width: 60%;
+      transition: width 0.4s ease;
+    }
+
+    .progress-labels {
+      display: flex;
+      justify-content: space-between;
+      font-size: 0.75rem;
+      color: var(--text-muted);
+      margin-top: 4px;
+    }
+
+    /* Breakdown Box */
+    .breakdown-box {
+      margin-top: 14px;
+      background: rgba(0, 0, 0, 0.25);
+      border-radius: 8px;
+      padding: 10px 12px;
+      font-size: 0.82rem;
+    }
+
+    .breakdown-title {
+      font-weight: 600;
+      color: var(--gold-main);
+      margin-bottom: 6px;
+      display: flex;
+      justify-content: space-between;
+    }
+
+    .breakdown-list {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 6px;
+    }
+
+    .breakdown-list span {
+      color: #cbd5e1;
+    }
+
+    .breakdown-list strong {
+      color: #fff;
+    }
+
+    /* Quest Sections */
+    .quest-card {
+      transition: var(--transition);
+    }
+
+    .quest-card.inactive {
+      opacity: 0.55;
+      filter: grayscale(0.4);
+    }
+
+    .tier-pills {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      margin-top: 8px;
+      margin-bottom: 12px;
+    }
+
+    .tier-pill {
+      background: var(--bg-input);
+      border: 1px solid var(--border-color);
+      color: var(--text-muted);
+      padding: 4px 10px;
+      border-radius: 6px;
+      font-size: 0.78rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: var(--transition);
+    }
+
+    .tier-pill:hover {
+      border-color: var(--gold-main);
+      color: #fff;
+    }
+
+    .tier-pill.active {
+      background: var(--gold-main);
+      color: #111;
+      border-color: var(--gold-main);
+      font-weight: 700;
+    }
+
+    .time-inputs {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 8px;
+    }
+
+    .time-sublabel {
+      font-size: 0.7rem;
+      color: var(--text-muted);
+      text-align: center;
+      margin-top: 2px;
+    }
+
+    .speedup-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 8px;
+    }
+
+    .inv-chips {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      margin-top: 10px;
+    }
+
+    .inv-chip {
+      background: var(--bg-card-alt);
+      border: 1px solid var(--border-color);
+      border-radius: 6px;
+      padding: 4px 8px;
+      font-size: 0.75rem;
+      color: var(--text-muted);
+    }
+
+    .inv-chip strong {
+      color: var(--gold-main);
+    }
+
+    .btn-sync {
+      background: rgba(56, 189, 248, 0.12);
+      border: 1px solid rgba(56, 189, 248, 0.3);
+      color: var(--accent-blue);
+      font-size: 0.78rem;
+      font-weight: 600;
+      padding: 4px 10px;
+      border-radius: 6px;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      transition: var(--transition);
+    }
+
+    .btn-sync:hover {
+      background: rgba(56, 189, 248, 0.25);
+    }
+
+    .help-text {
+      font-size: 0.76rem;
+      color: var(--text-muted);
+      margin-top: 4px;
+    }
+
+    footer {
+      text-align: center;
+      margin-top: 40px;
+      color: var(--text-muted);
+      font-size: 0.8rem;
+    }
+  </style>
+</head>
+<body>
+
+<div class="container">
+  <header>
+    <div class="title-badge">Puzzles & Chaos Strategy Tool</div>
+    <h1>Troop & Quest Calculator</h1>
+    <p class="subtitle">Medical tent limit tracker, training cycles, Army Expansion & Royal Arms Race point engines</p>
+  </header>
+
+  <div class="grid">
+    <!-- LEFT COLUMN: MEDICAL TENT & TROOP CALCULATOR -->
+    <div class="card primary-accent">
+      <div class="card-header">
+        <div class="card-title">
+          <span class="icon">⛺</span> Medical Tent & Troop Training
+        </div>
+        <button class="tag-btn" id="btnPresetExample" title="Load example with 100k tents, 60k troops (15k each), 2k batch">Load Example</button>
+      </div>
+
+      <!-- Medical Tent Capacity -->
+      <div class="form-group">
+        <label for="medTentCap">Medical Tent Capacity</label>
+        <div class="input-wrap">
+          <input type="text" id="medTentCap" placeholder="e.g. 100,000 or 100k" value="100,000">
+        </div>
+        <div class="quick-tags">
+          <button class="tag-btn" onclick="setCap(50000)">50k</button>
+          <button class="tag-btn" onclick="setCap(100000)">100k</button>
+          <button class="tag-btn" onclick="setCap(150000)">150k</button>
+          <button class="tag-btn" onclick="setCap(200000)">200k</button>
+          <button class="tag-btn" onclick="setCap(300000)">300k</button>
+        </div>
+      </div>
+
+      <!-- Current Troops -->
+      <div class="form-group">
+        <div style="display:flex; justify-content:space-between; align-items:center;">
+          <label>Current T1 Troops</label>
+          <span id="currentTotalBadge" style="font-size:0.8rem; color:var(--accent-blue); font-weight:600;">Total: 60,000</span>
+        </div>
+        <div class="troops-grid">
+          <div class="troop-item">
+            <div class="troop-label">
+              <span class="badge-dot dot-infantry"></span> Infantry
+            </div>
+            <input type="text" id="troopInfantry" placeholder="0" value="15,000">
+          </div>
+          <div class="troop-item">
+            <div class="troop-label">
+              <span class="badge-dot dot-cavalry"></span> Cavalry
+            </div>
+            <input type="text" id="troopCavalry" placeholder="0" value="15,000">
+          </div>
+          <div class="troop-item">
+            <div class="troop-label">
+              <span class="badge-dot dot-archers"></span> Archers
+            </div>
+            <input type="text" id="troopArchers" placeholder="0" value="15,000">
+          </div>
+          <div class="troop-item">
+            <div class="troop-label">
+              <span class="badge-dot dot-vehicles"></span> Vehicles
+            </div>
+            <input type="text" id="troopVehicles" placeholder="0" value="15,000">
+          </div>
+        </div>
+      </div>
+
+      <!-- Training Batch Size -->
+      <div class="form-group">
+        <label for="trainingSize">Training Size (Per Batch)</label>
+        <div class="input-wrap">
+          <input type="text" id="trainingSize" placeholder="e.g. 2,000 or 2k" value="2,000">
+        </div>
+        <div class="quick-tags">
+          <button class="tag-btn" onclick="setTrainSize(1000)">1k</button>
+          <button class="tag-btn" onclick="setTrainSize(1500)">1.5k</button>
+          <button class="tag-btn" onclick="setTrainSize(2000)">2k</button>
+          <button class="tag-btn" onclick="setTrainSize(2500)">2.5k</button>
+          <button class="tag-btn" onclick="setTrainSize(5000)">5k</button>
+        </div>
+      </div>
+
+      <!-- Occupancy Bar -->
+      <div class="progress-wrap">
+        <div class="progress-bar-bg">
+          <div class="progress-fill" id="occupancyFill"></div>
+        </div>
+        <div class="progress-labels">
+          <span id="occupancyText">60,000 / 100,000 occupied</span>
+          <span id="occupancyPct">60.0%</span>
+        </div>
+      </div>
+
+      <!-- Primary Results Banner -->
+      <div class="results-banner">
+        <div class="stat-row">
+          <span class="stat-label">Units Left Needed to Train:</span>
+          <span class="stat-val highlight" id="unitsLeftResult">40,000</span>
+        </div>
+        <div class="stat-row">
+          <span class="stat-label">Times / Batches Needed to Train:</span>
+          <span class="stat-val highlight" style="color:var(--accent-green)" id="batchesResult">20 times</span>
+        </div>
+      </div>
+
+      <!-- Balanced Troop Recommendation -->
+      <div class="breakdown-box">
+        <div class="breakdown-title">
+          <span>⚖️ Recommended Balanced Training</span>
+          <span id="evenDistributionNote" style="font-weight:normal; font-size:0.75rem; color:var(--text-muted);">Goal: equal count in each type</span>
+        </div>
+        <div class="breakdown-list">
+          <div>Infantry: <strong id="recInfantry">10,000</strong> (<span id="batchesInfantry">5 trains</span>)</div>
+          <div>Cavalry: <strong id="recCavalry">10,000</strong> (<span id="batchesCavalry">5 trains</span>)</div>
+          <div>Archers: <strong id="recArchers">10,000</strong> (<span id="batchesArchers">5 trains</span>)</div>
+          <div>Vehicles: <strong id="recVehicles">10,000</strong> (<span id="batchesVehicles">5 trains</span>)</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- RIGHT COLUMN: QUEST SECTIONS -->
+    <div style="display:flex; flex-direction:column; gap:20px;">
+      
+      <!-- QUEST 1: ARMY EXPANSION -->
+      <div class="card quest-army" id="questArmyCard">
+        <div class="card-header">
+          <div class="card-title">
+            <span class="icon">⚔️</span> Army Expansion Quest
+          </div>
+          <div class="toggle-wrap">
+            <span>Enabled</span>
+            <label class="switch">
+              <input type="checkbox" id="chkArmyExp" checked>
+              <span class="slider"></span>
+            </label>
+          </div>
+        </div>
+
+        <div id="armyExpContent">
+          <div style="display:flex; justify-content:space-between; align-items:baseline;">
+            <label>Selected Unit Tier</label>
+            <span id="tierPointsTag" style="font-size:0.78rem; color:var(--gold-main); font-weight:700;">T1 = 5 pts/unit</span>
+          </div>
+
+          <!-- Tier Selection Pills -->
+          <div class="tier-pills" id="tierPillsContainer"></div>
+
+          <div class="form-group" style="margin-bottom:10px;">
+            <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:6px;">
+              <label style="margin-bottom:0;" for="armyTroopsCount">Troops to Train for Quest</label>
+              <button class="btn-sync" id="btnSyncArmyTroops">
+                <span>🔄 Sync with Needed</span>
+              </button>
+            </div>
+            <input type="text" id="armyTroopsCount" value="40,000">
+            <div class="help-text">Synced to 'Units Left Needed' by default, or type any custom amount.</div>
+          </div>
+
+          <!-- Event Points Output -->
+          <div class="results-banner" style="margin-top:12px; border-color:rgba(239,68,68,0.3); background:linear-gradient(135deg, rgba(239,68,68,0.08), rgba(239,68,68,0.02));">
+            <div class="stat-row">
+              <span class="stat-label">Army Expansion Points:</span>
+              <span class="stat-val highlight" style="color:#f87171;" id="armyPointsResult">200,000 pts</span>
+            </div>
+          </div>
+
+          <!-- Target Goal Reverse Calculator -->
+          <div style="margin-top:14px; padding-top:12px; border-top:1px solid rgba(255,255,255,0.06);">
+            <div style="font-size:0.78rem; font-weight:600; color:var(--text-muted); margin-bottom:6px;">GOAL PLANNER: REACH TARGET EVENT POINTS</div>
+            <div style="display:flex; gap:8px;">
+              <input type="text" id="targetArmyPoints" placeholder="Target Points (e.g. 500k)" style="font-size:0.85rem; padding:8px 10px;">
+              <button class="tag-btn" style="white-space:nowrap; padding:8px 12px; font-weight:600;" onclick="calcTroopsForTargetPoints()">Calculate</button>
+            </div>
+            <div id="targetArmyOutput" style="margin-top:6px; font-size:0.78rem; color:#cbd5e1; display:none;"></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- QUEST 2: ROYAL ARMS RACE -->
+      <div class="card quest-arms" id="questArmsCard">
+        <div class="card-header">
+          <div class="card-title">
+            <span class="icon">👑</span> Royal Arms Race Quest
+          </div>
+          <div class="toggle-wrap">
+            <span>Enabled</span>
+            <label class="switch">
+              <input type="checkbox" id="chkArmsRace" checked>
+              <span class="slider"></span>
+            </label>
+          </div>
+        </div>
+
+        <div id="armsRaceContent">
+          <p style="font-size:0.82rem; color:var(--text-muted); margin-bottom:12px;">
+            Speedup bonuses: <strong style="color:#fff;">1 minute speedup = 15 points</strong> (Building, Research, Training, Universal)
+          </p>
+
+          <div class="form-group">
+            <label>Speedups Spent / Budgeted (Minutes)</label>
+            <div class="speedup-grid">
+              <div>
+                <span class="time-sublabel">Training (Mins)</span>
+                <input type="text" id="spdTraining" placeholder="0" value="0">
+              </div>
+              <div>
+                <span class="time-sublabel">Building (Mins)</span>
+                <input type="text" id="spdBuilding" placeholder="0" value="0">
+              </div>
+              <div>
+                <span class="time-sublabel">Research (Mins)</span>
+                <input type="text" id="spdResearch" placeholder="0" value="0">
+              </div>
+              <div>
+                <span class="time-sublabel">Universal (Mins)</span>
+                <input type="text" id="spdUniversal" placeholder="0" value="0">
+              </div>
+            </div>
+          </div>
+
+          <div class="results-banner" style="margin-top:12px; border-color:rgba(56,189,248,0.3); background:linear-gradient(135deg, rgba(56,189,248,0.08), rgba(56,189,248,0.02));">
+            <div class="stat-row">
+              <span class="stat-label">Total Minutes Speedup:</span>
+              <span class="stat-val" id="totalSpeedupMins">0 mins</span>
+            </div>
+            <div class="stat-row">
+              <span class="stat-label">Royal Arms Race Points:</span>
+              <span class="stat-val highlight" style="color:var(--accent-blue);" id="armsRacePointsResult">0 pts</span>
+            </div>
+          </div>
+
+          <!-- Target Points Calculator for Arms Race -->
+          <div style="margin-top:14px; padding-top:12px; border-top:1px solid rgba(255,255,255,0.06);">
+            <div style="font-size:0.78rem; font-weight:600; color:var(--text-muted); margin-bottom:6px;">GOAL PLANNER: SPEEDUPS NEEDED FOR TARGET POINTS</div>
+            <div style="display:flex; gap:8px;">
+              <input type="text" id="targetArmsPoints" placeholder="Target Points (e.g. 150k)" style="font-size:0.85rem; padding:8px 10px;">
+              <button class="tag-btn" style="white-space:nowrap; padding:8px 12px; font-weight:600;" onclick="calcSpeedupForTargetArms()">Calculate</button>
+            </div>
+            <div id="targetArmsOutput" style="margin-top:6px; font-size:0.78rem; color:#cbd5e1; display:none;"></div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ADVANCED SPEEDUP & TRAINING TIME PLANNER -->
+  <div class="card" style="margin-top:20px; border-color:rgba(192, 132, 252, 0.3);">
+    <div class="card-header">
+      <div class="card-title">
+        <span class="icon">⏱️</span> Advanced Speedup & Batch Time Planner
+      </div>
+      <button class="btn-sync" id="btnApplyToArmsRace" title="Transfer total speedup time directly to Royal Arms Race quest calculator">
+        <span>⚡ Apply to Royal Arms Race</span>
+      </button>
+    </div>
+
+    <div style="display:grid; grid-template-columns: 1fr; gap:20px;">
+      <div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap:16px;">
+        <!-- Single Batch Duration -->
+        <div>
+          <label>Duration of 1 Training Batch</label>
+          <div class="time-inputs">
+            <div>
+              <input type="number" id="batchHours" min="0" placeholder="0" value="1">
+              <div class="time-sublabel">Hours</div>
+            </div>
+            <div>
+              <input type="number" id="batchMins" min="0" max="59" placeholder="0" value="15">
+              <div class="time-sublabel">Minutes</div>
+            </div>
+            <div>
+              <input type="number" id="batchSecs" min="0" max="59" placeholder="0" value="0">
+              <div class="time-sublabel">Seconds</div>
+            </div>
+          </div>
+          <div class="help-text">Look at your Barracks/Training ground to see the exact time for 1 batch.</div>
+        </div>
+
+        <!-- Speedups Required Summary -->
+        <div>
+          <label>Total Speedup Required for All Batches</label>
+          <div class="breakdown-box" style="margin-top:0; padding:12px 14px;">
+            <div class="stat-row" style="padding:4px 0;">
+              <span class="stat-label">For <span id="advBatchCount" style="color:#fff; font-weight:700;">20</span> batches:</span>
+              <span class="stat-val" id="advTotalTimeStr" style="font-size:1rem; color:var(--accent-purple);">25h 0m</span>
+            </div>
+            <div class="stat-row" style="padding:4px 0;">
+              <span class="stat-label">Total in Minutes:</span>
+              <span class="stat-val" id="advTotalMinutes" style="font-size:1rem;">1,500 mins</span>
+            </div>
+            <div class="stat-row" style="padding:4px 0;">
+              <span class="stat-label">Points in Royal Arms (15/m):</span>
+              <span class="stat-val" id="advRoyalPoints" style="font-size:1.1rem; color:var(--accent-blue); font-weight:700;">22,500 pts</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Speedup Items Breakdown -->
+      <div>
+        <div style="font-size:0.8rem; font-weight:600; color:var(--text-muted); text-transform:uppercase; letter-spacing:0.05em;">
+          Optimal Speedup Item Usage Breakdown
+        </div>
+        <div class="inv-chips" id="invChipsContainer"></div>
+      </div>
+    </div>
+  </div>
+
+  <footer>
+    Puzzles & Chaos Troop & Quest Calculator • Standalone Offline Tool • Values auto-saved to browser
+  </footer>
+</div>
+
+<script>
+  // Tier points table for Army Expansion
+  const TIER_POINTS = [
+    { tier: 1, points: 5 },
+    { tier: 2, points: 10 },
+    { tier: 3, points: 15 },
+    { tier: 4, points: 22 },
+    { tier: 5, points: 30 },
+    { tier: 6, points: 40 },
+    { tier: 7, points: 55 },
+    { tier: 8, points: 75 },
+    { tier: 9, points: 100 },
+    { tier: 10, points: 135 },
+    { tier: 11, points: 180 },
+    { tier: 12, points: 280 },
+    { tier: 13, points: 420 },
+  ];
+
+  let selectedTier = 1;
+
+  function parseFormattedNumber(val) {
+    if (typeof val === 'number') return isNaN(val) ? 0 : Math.max(0, val);
+    if (!val) return 0;
+    let s = val.toString().trim().toLowerCase().replace(/,/g, '');
+    let multiplier = 1;
+    if (s.endsWith('k')) {
+      multiplier = 1000;
+      s = s.slice(0, -1);
+    } else if (s.endsWith('m')) {
+      multiplier = 1000000;
+      s = s.slice(0, -1);
+    }
+    const num = parseFloat(s);
+    return isNaN(num) ? 0 : Math.max(0, num * multiplier);
+  }
+
+  function formatNum(num) {
+    return Math.round(num).toLocaleString('en-US');
+  }
+
+  const medTentCapInput = document.getElementById('medTentCap');
+  const troopInfantryInput = document.getElementById('troopInfantry');
+  const troopCavalryInput = document.getElementById('troopCavalry');
+  const troopArchersInput = document.getElementById('troopArchers');
+  const troopVehiclesInput = document.getElementById('troopVehicles');
+  const trainingSizeInput = document.getElementById('trainingSize');
+
+  const currentTotalBadge = document.getElementById('currentTotalBadge');
+  const occupancyFill = document.getElementById('occupancyFill');
+  const occupancyText = document.getElementById('occupancyText');
+  const occupancyPct = document.getElementById('occupancyPct');
+  const unitsLeftResult = document.getElementById('unitsLeftResult');
+  const batchesResult = document.getElementById('batchesResult');
+
+  const recInfantry = document.getElementById('recInfantry');
+  const recCavalry = document.getElementById('recCavalry');
+  const recArchers = document.getElementById('recArchers');
+  const recVehicles = document.getElementById('recVehicles');
+  const batchesInfantry = document.getElementById('batchesInfantry');
+  const batchesCavalry = document.getElementById('batchesCavalry');
+  const batchesArchers = document.getElementById('batchesArchers');
+  const batchesVehicles = document.getElementById('batchesVehicles');
+
+  const chkArmyExp = document.getElementById('chkArmyExp');
+  const questArmyCard = document.getElementById('questArmyCard');
+  const armyTroopsCountInput = document.getElementById('armyTroopsCount');
+  const armyPointsResult = document.getElementById('armyPointsResult');
+  const tierPointsTag = document.getElementById('tierPointsTag');
+  const tierPillsContainer = document.getElementById('tierPillsContainer');
+  const btnSyncArmyTroops = document.getElementById('btnSyncArmyTroops');
+
+  const chkArmsRace = document.getElementById('chkArmsRace');
+  const questArmsCard = document.getElementById('questArmsCard');
+  const spdTrainingInput = document.getElementById('spdTraining');
+  const spdBuildingInput = document.getElementById('spdBuilding');
+  const spdResearchInput = document.getElementById('spdResearch');
+  const spdUniversalInput = document.getElementById('spdUniversal');
+  const totalSpeedupMins = document.getElementById('totalSpeedupMins');
+  const armsRacePointsResult = document.getElementById('armsRacePointsResult');
+
+  const batchHoursInput = document.getElementById('batchHours');
+  const batchMinsInput = document.getElementById('batchMins');
+  const batchSecsInput = document.getElementById('batchSecs');
+  const advBatchCount = document.getElementById('advBatchCount');
+  const advTotalTimeStr = document.getElementById('advTotalTimeStr');
+  const advTotalMinutes = document.getElementById('advTotalMinutes');
+  const advRoyalPoints = document.getElementById('advRoyalPoints');
+  const invChipsContainer = document.getElementById('invChipsContainer');
+  const btnApplyToArmsRace = document.getElementById('btnApplyToArmsRace');
+
+  function initTierPills() {
+    tierPillsContainer.innerHTML = '';
+    TIER_POINTS.forEach(t => {
+      const btn = document.createElement('button');
+      btn.className = `tier-pill ${t.tier === selectedTier ? 'active' : ''}`;
+      btn.textContent = `T${t.tier} (${t.points} pts)`;
+      btn.onclick = () => {
+        selectedTier = t.tier;
+        document.querySelectorAll('.tier-pill').forEach(p => p.classList.remove('active'));
+        btn.classList.add('active');
+        tierPointsTag.textContent = `T${t.tier} = ${t.points} pts/unit`;
+        recalc();
+      };
+      tierPillsContainer.appendChild(btn);
+    });
+  }
+
+  window.setCap = function(val) {
+    medTentCapInput.value = formatNum(val);
+    recalc();
+  };
+
+  window.setTrainSize = function(val) {
+    trainingSizeInput.value = formatNum(val);
+    recalc();
+  };
+
+  document.getElementById('btnPresetExample').onclick = () => {
+    medTentCapInput.value = "100,000";
+    troopInfantryInput.value = "15,000";
+    troopCavalryInput.value = "15,000";
+    troopArchersInput.value = "15,000";
+    troopVehiclesInput.value = "15,000";
+    trainingSizeInput.value = "2,000";
+    selectedTier = 1;
+    initTierPills();
+    tierPointsTag.textContent = `T1 = 5 pts/unit`;
+    recalc();
+  };
+
+  let globalUnitsLeft = 40000;
+  let globalBatchesNeeded = 20;
+
+  function recalc() {
+    const tentCap = parseFormattedNumber(medTentCapInput.value);
+    const inf = parseFormattedNumber(troopInfantryInput.value);
+    const cav = parseFormattedNumber(troopCavalryInput.value);
+    const arch = parseFormattedNumber(troopArchersInput.value);
+    const veh = parseFormattedNumber(troopVehiclesInput.value);
+    const trainSize = Math.max(1, parseFormattedNumber(trainingSizeInput.value));
+
+    const totalCurrent = inf + cav + arch + veh;
+    currentTotalBadge.textContent = `Total: ${formatNum(totalCurrent)}`;
+
+    const unitsLeft = Math.max(0, tentCap - totalCurrent);
+    globalUnitsLeft = unitsLeft;
+
+    const batches = Math.ceil(unitsLeft / trainSize);
+    globalBatchesNeeded = batches;
+
+    const pct = tentCap > 0 ? Math.min(100, (totalCurrent / tentCap) * 100) : 0;
+    occupancyFill.style.width = `${pct}%`;
+    occupancyFill.style.background = pct > 100 ? '#ef4444' : 'linear-gradient(90deg, #3b82f6, var(--gold-main))';
+    occupancyText.textContent = `${formatNum(totalCurrent)} / ${formatNum(tentCap)} occupied`;
+    occupancyPct.textContent = `${pct.toFixed(1)}%`;
+
+    unitsLeftResult.textContent = formatNum(unitsLeft);
+    batchesResult.textContent = `${formatNum(batches)} times`;
+
+    const targetPerType = tentCap / 4;
+    const diffInf = Math.max(0, targetPerType - inf);
+    const diffCav = Math.max(0, targetPerType - cav);
+    const diffArch = Math.max(0, targetPerType - arch);
+    const diffVeh = Math.max(0, targetPerType - veh);
+
+    recInfantry.textContent = formatNum(diffInf);
+    recCavalry.textContent = formatNum(diffCav);
+    recArchers.textContent = formatNum(diffArch);
+    recVehicles.textContent = formatNum(diffVeh);
+
+    batchesInfantry.textContent = `${Math.ceil(diffInf / trainSize)} trains`;
+    batchesCavalry.textContent = `${Math.ceil(diffCav / trainSize)} trains`;
+    batchesArchers.textContent = `${Math.ceil(diffArch / trainSize)} trains`;
+    batchesVehicles.textContent = `${Math.ceil(diffVeh / trainSize)} trains`;
+
+    // Quest 1: Army Expansion
+    if (chkArmyExp.checked) {
+      questArmyCard.classList.remove('inactive');
+      const armyTroops = parseFormattedNumber(armyTroopsCountInput.value);
+      const tierObj = TIER_POINTS.find(t => t.tier === selectedTier) || TIER_POINTS[0];
+      const pts = armyTroops * tierObj.points;
+      armyPointsResult.textContent = `${formatNum(pts)} pts`;
+    } else {
+      questArmyCard.classList.add('inactive');
+      armyPointsResult.textContent = `0 pts (Disabled)`;
+    }
+
+    // Quest 2: Royal Arms Race
+    if (chkArmsRace.checked) {
+      questArmsCard.classList.remove('inactive');
+      const spdTrain = parseFormattedNumber(spdTrainingInput.value);
+      const spdBuild = parseFormattedNumber(spdBuildingInput.value);
+      const spdRes = parseFormattedNumber(spdResearchInput.value);
+      const spdUni = parseFormattedNumber(spdUniversalInput.value);
+      const totalSpdMins = spdTrain + spdBuild + spdRes + spdUni;
+      totalSpeedupMins.textContent = `${formatNum(totalSpdMins)} mins (${(totalSpdMins / 60).toFixed(1)} hrs)`;
+      const armsPts = totalSpdMins * 15;
+      armsRacePointsResult.textContent = `${formatNum(armsPts)} pts`;
+    } else {
+      questArmsCard.classList.add('inactive');
+      totalSpeedupMins.textContent = `0 mins`;
+      armsRacePointsResult.textContent = `0 pts (Disabled)`;
+    }
+
+    // Advanced Speedup section
+    const bHours = parseFormattedNumber(batchHoursInput.value);
+    const bMins = parseFormattedNumber(batchMinsInput.value);
+    const bSecs = parseFormattedNumber(batchSecsInput.value);
+    const batchTotalSeconds = (bHours * 3600) + (bMins * 60) + bSecs;
+
+    advBatchCount.textContent = formatNum(batches);
+
+    const totalSecondsReq = batchTotalSeconds * batches;
+    const totalMinutesReq = Math.ceil(totalSecondsReq / 60);
+
+    const calcHours = Math.floor(totalMinutesReq / 60);
+    const calcMins = totalMinutesReq % 60;
+    const calcDays = (totalMinutesReq / 1440).toFixed(1);
+
+    advTotalTimeStr.textContent = `${calcHours}h ${calcMins}m (${calcDays}d)`;
+    advTotalMinutes.textContent = `${formatNum(totalMinutesReq)} mins`;
+
+    const potentialRoyalPts = totalMinutesReq * 15;
+    advRoyalPoints.textContent = `${formatNum(potentialRoyalPts)} pts`;
+
+    renderSpeedupInventory(totalMinutesReq);
+    saveState();
+  }
+
+  function renderSpeedupInventory(totalMinutes) {
+    invChipsContainer.innerHTML = '';
+    if (totalMinutes <= 0) {
+      invChipsContainer.innerHTML = '<span style="color:var(--text-muted); font-size:0.75rem;">No speedups needed</span>';
+      return;
+    }
+
+    const items = [
+      { name: '24h', mins: 1440 },
+      { name: '8h', mins: 480 },
+      { name: '3h', mins: 180 },
+      { name: '1h', mins: 60 },
+      { name: '15m', mins: 15 },
+      { name: '5m', mins: 5 },
+      { name: '1m', mins: 1 },
+    ];
+
+    let rem = totalMinutes;
+    items.forEach(item => {
+      if (rem >= item.mins) {
+        const count = Math.floor(rem / item.mins);
+        rem %= item.mins;
+        const chip = document.createElement('div');
+        chip.className = 'inv-chip';
+        chip.innerHTML = `${item.name}: <strong>${formatNum(count)}x</strong>`;
+        invChipsContainer.appendChild(chip);
+      }
+    });
+
+    if (rem > 0) {
+      const chip = document.createElement('div');
+      chip.className = 'inv-chip';
+      chip.innerHTML = `1m: <strong>1x</strong>`;
+      invChipsContainer.appendChild(chip);
+    }
+  }
+
+  [
+    medTentCapInput, troopInfantryInput, troopCavalryInput, troopArchersInput,
+    troopVehiclesInput, trainingSizeInput, armyTroopsCountInput,
+    spdTrainingInput, spdBuildingInput, spdResearchInput, spdUniversalInput,
+    batchHoursInput, batchMinsInput, batchSecsInput
+  ].forEach(el => {
+    el.addEventListener('input', recalc);
+  });
+
+  chkArmyExp.addEventListener('change', recalc);
+  chkArmsRace.addEventListener('change', recalc);
+
+  btnSyncArmyTroops.addEventListener('click', () => {
+    armyTroopsCountInput.value = formatNum(globalUnitsLeft);
+    recalc();
+  });
+
+  btnApplyToArmsRace.addEventListener('click', () => {
+    const totalMinutesReq = parseFormattedNumber(advTotalMinutes.textContent);
+    spdTrainingInput.value = formatNum(totalMinutesReq);
+    if (!chkArmsRace.checked) {
+      chkArmsRace.checked = true;
+    }
+    recalc();
+    questArmsCard.scrollIntoView({ behavior: 'smooth' });
+  });
+
+  window.calcTroopsForTargetPoints = function() {
+    const targetPts = parseFormattedNumber(document.getElementById('targetArmyPoints').value);
+    const tierObj = TIER_POINTS.find(t => t.tier === selectedTier) || TIER_POINTS[0];
+    const out = document.getElementById('targetArmyOutput');
+    if (targetPts <= 0) {
+      out.style.display = 'none';
+      return;
+    }
+    const neededTroops = Math.ceil(targetPts / tierObj.points);
+    const trainSize = Math.max(1, parseFormattedNumber(trainingSizeInput.value));
+    const batches = Math.ceil(neededTroops / trainSize);
+
+    out.style.display = 'block';
+    out.innerHTML = `Need <strong style="color:var(--gold-main);">${formatNum(neededTroops)}</strong> T${tierObj.tier} troops (${formatNum(batches)} training batches at ${formatNum(trainSize)}/batch)`;
+  };
+
+  window.calcSpeedupForTargetArms = function() {
+    const targetPts = parseFormattedNumber(document.getElementById('targetArmsPoints').value);
+    const out = document.getElementById('targetArmsOutput');
+    if (targetPts <= 0) {
+      out.style.display = 'none';
+      return;
+    }
+    const minsNeeded = Math.ceil(targetPts / 15);
+    const hrsNeeded = (minsNeeded / 60).toFixed(1);
+    const daysNeeded = (minsNeeded / 1440).toFixed(1);
+
+    out.style.display = 'block';
+    out.innerHTML = `Need <strong style="color:var(--accent-blue);">${formatNum(minsNeeded)}</strong> speedup minutes (~${hrsNeeded} hours / ${daysNeeded} days)`;
+  };
+
+  function saveState() {
+    try {
+      const state = {
+        medTentCap: medTentCapInput.value,
+        inf: troopInfantryInput.value,
+        cav: troopCavalryInput.value,
+        arch: troopArchersInput.value,
+        veh: troopVehiclesInput.value,
+        trainSize: trainingSizeInput.value,
+        selectedTier: selectedTier,
+        armyTroops: armyTroopsCountInput.value,
+        chkArmyExp: chkArmyExp.checked,
+        chkArmsRace: chkArmsRace.checked,
+        spdTrain: spdTrainingInput.value,
+        spdBuild: spdBuildingInput.value,
+        spdRes: spdResearchInput.value,
+        spdUni: spdUniversalInput.value,
+        batchHours: batchHoursInput.value,
+        batchMins: batchMinsInput.value,
+        batchSecs: batchSecsInput.value,
+      };
+      localStorage.setItem('pnc_calc_state', JSON.stringify(state));
+    } catch (e) {}
+  }
+
+  function loadState() {
+    try {
+      const raw = localStorage.getItem('pnc_calc_state');
+      if (raw) {
+        const s = JSON.parse(raw);
+        if (s.medTentCap !== undefined) medTentCapInput.value = s.medTentCap;
+        if (s.inf !== undefined) troopInfantryInput.value = s.inf;
+        if (s.cav !== undefined) troopCavalryInput.value = s.cav;
+        if (s.arch !== undefined) troopArchersInput.value = s.arch;
+        if (s.veh !== undefined) troopVehiclesInput.value = s.veh;
+        if (s.trainSize !== undefined) trainingSizeInput.value = s.trainSize;
+        if (s.selectedTier !== undefined) selectedTier = s.selectedTier;
+        if (s.armyTroops !== undefined) armyTroopsCountInput.value = s.armyTroops;
+        if (s.chkArmyExp !== undefined) chkArmyExp.checked = s.chkArmyExp;
+        if (s.chkArmsRace !== undefined) chkArmsRace.checked = s.chkArmsRace;
+        if (s.spdTrain !== undefined) spdTrainingInput.value = s.spdTrain;
+        if (s.spdBuild !== undefined) spdBuildingInput.value = s.spdBuild;
+        if (s.spdRes !== undefined) spdResearchInput.value = s.spdRes;
+        if (s.spdUni !== undefined) spdUniversalInput.value = s.spdUni;
+        if (s.batchHours !== undefined) batchHoursInput.value = s.batchHours;
+        if (s.batchMins !== undefined) batchMinsInput.value = s.batchMins;
+        if (s.batchSecs !== undefined) batchSecsInput.value = s.batchSecs;
+      }
+    } catch (e) {}
+  }
+
+  initTierPills();
+  loadState();
+  initTierPills();
+  recalc();
+</script>
+</body>
+</html>
